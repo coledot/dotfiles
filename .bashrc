@@ -1,7 +1,6 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#! /bin/bash
 
+# FIXME? maybe it might help to use this?
 ## If not running interactively, don't do anything
 #[ -z "$PS1" ] && return
 
@@ -27,10 +26,10 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 xterm-color)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;34m\]\W \$ \[\033[00m\]'
+    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
     ;;
 *)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;34m\]\W \$ \[\033[00m\]'
+    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
     ;;
 esac
 
