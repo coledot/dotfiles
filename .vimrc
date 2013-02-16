@@ -6,7 +6,6 @@ set autoindent
 set ruler
 set cindent
 set noequalalways
-set ai
 set noexpandtab
 set modeline
 set backup
@@ -25,6 +24,8 @@ endif
 set tenc=utf-8
 set enc=utf-8
 
+set complete=.,b,u,]
+
 syntax enable
 
 map <c-h> <c-w>h
@@ -32,12 +33,24 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 
+cnoremap <c-k> <Up>
+cnoremap <c-j> <Down>
+
 let mapleader=" "
 
 let g:miniBufExplSplitBelow = 1 " MiniBufExplorer on bottom
 let g:miniBufExplMaxSize = 3 " no. lines to use
 "let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
+
+" "commatize"
+let @c = ':1,$-1s/$/,/g
+:%s/,\n/,/g
+'
+
+noremap <silent><Leader>/ :nohls<CR>
+
+call pathogen#infect()
 
 filetype on
 filetype plugin on
