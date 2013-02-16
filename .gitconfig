@@ -1,0 +1,5 @@
+[user]
+	name = Cole Thompson
+	email = cole.thompson@gmail.com
+[core]
+	editor = gvim -f
