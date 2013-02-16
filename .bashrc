@@ -7,9 +7,6 @@
 
 shopt -s checkwinsize
 
-#Changes default manpager to vim
-#export MANPAGER="col -b | view -c 'set ft=man nomod nolist' -"
-
 # don't put duplicate lines in the history. See bash(1) for more options
 export HISTCONTROL=ignoredups
 # ... and ignore same sucessive entries.
@@ -30,17 +27,12 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 xterm-color)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;36m\]\t \[\033[01;34m\]\W \$ \[\033[00m\]'
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;34m\]\W \$ \[\033[00m\]'
     ;;
 *)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;36m\]\t \[\033[01;34m\]\W \$ \[\033[00m\]'
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h \[\033[01;34m\]\W \$ \[\033[00m\]'
     ;;
 esac
-
-# Comment in the above and uncomment this below for a color prompt
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -51,15 +43,41 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+export EDITOR=/usr/bin/vim
 
+# grab env vars from ssh agent
+if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
+	. $HOME/.ssh-agent
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# TODO use this
+# aliases are defined in a separate file
 #if [ -f ~/.bash_aliases ]; then
 #    . ~/.bash_aliases
 #fi
 
+alias ll="ls -l"
+alias la="ls -la"
+# quack
+alias ducks="du -cks"
+# cd to newest subdirectory
+alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
+
+alias keyon="ssh-add -t 0"
+alias keyoff="ssh-add -D"
+alias keyls="ssh-add -l"
+
+stty stop undef
+stty start undef
+
+# host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "trace" ]]; then
     # enable color support of ls and also add handy aliases
     if [ "$TERM" != "dumb" ]; then
@@ -84,34 +102,6 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 fi
-
-alias ll="ls -l"
-alias la="ls -la"
-export EDITOR=/usr/bin/vim
-
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-fi
-
-# quack
-alias ducks="du -cks"
-# cd to newest subdirectory
-alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
-
-# grab env vars from ssh agent
-if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
-	. $HOME/.ssh-agent
-fi
-
-alias keyon="ssh-add -t 0"
-alias keyoff="ssh-add -D"
-alias keyls="ssh-add -l"
-
-stty stop undef
-stty start undef
 
 # vim: et ts=4 sw=4
 
