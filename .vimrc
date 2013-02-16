@@ -43,10 +43,11 @@ let g:miniBufExplMaxSize = 3 " no. lines to use
 "let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
+" FIXME
 " "commatize"
-let @c = ':1,$-1s/$/,/g
-:%s/,\n/,/g
-'
+"let @c = ':1,$-1s/$/,/g
+":%s/,\n/,/g
+"'
 
 noremap <silent><Leader>/ :nohls<CR>
 
