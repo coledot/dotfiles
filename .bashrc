@@ -60,7 +60,6 @@ esac
 #    . ~/.bash_aliases
 #fi
 
-# FIXME? is there a cleaner way to do platform detection like this?
 if [[ "$HOSTNAME" == "trace" ]]; then
     # enable color support of ls and also add handy aliases
     if [ "$TERM" != "dumb" ]; then
@@ -68,9 +67,6 @@ if [[ "$HOSTNAME" == "trace" ]]; then
         alias ls='ls --color=auto'
     fi
     
-    # FIXME? is the double-alias necessary?
-    alias ls="ls --color"
-
     export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
     export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
     
