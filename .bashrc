@@ -96,5 +96,23 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# quack
+alias ducks="du -cks"
+# cd to newest subdirectory
+alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
+
+# grab env vars from ssh agent
+if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
+	. $HOME/.ssh-agent
+fi
+
+alias keyon="ssh-add -t 0"
+alias keyoff="ssh-add -D"
+alias keyls="ssh-add -l"
+
+# FIXME does this break non-interactive programs?
+stty stop undef
+stty start undef
+
 # vim: et ts=4 sw=4
 

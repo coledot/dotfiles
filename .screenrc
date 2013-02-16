@@ -1,9 +1,16 @@
+startup_message off
 autodetach on
 
-#caption always "%{= kw}%?%-Lw%?%{+b kw}%n*%t%f %?(%u)%?%{= kw}%?%+Lw%?"
+# FIXME which is correct?
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=%D %d %M %c"
 caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 vbell off
 
 defscrollback 1000
+
+bind k focus up
+bind ^k focus up
+bind j focus down
+bind ^j focus down
 
