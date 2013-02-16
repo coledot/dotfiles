@@ -60,21 +60,34 @@ esac
 #    . ~/.bash_aliases
 #fi
 
-## enable color support of ls and also add handy aliases
-#if [ "$TERM" != "dumb" ]; then
-#	eval "`dircolors -b`"
-#	alias ls='ls --color=auto'
-#    #alias dir='ls --color=auto --format=vertical'
-#    #alias vdir='ls --color=auto --format=long'
-#fi
+if [[ "$HOSTNAME" == "trace" ]]; then
+    # enable color support of ls and also add handy aliases
+    if [ "$TERM" != "dumb" ]; then
+        eval "`dircolors -b`"
+        alias ls='ls --color=auto'
+    fi
+    
+    export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
+    export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
+    
+    export GOROOT="/home/cole/go"
+    export GOARCH=amd64
+    export GOOS=linux
+    export GOBIN="/home/cole/local/bin"
 
-#alias ls="ls --color"
+    export LD_LIBRARY_PATH="/usr/local/lib"
+elif [[ "$HOSTNAME" == "detune" ]]; then
+    # stupid OS X
+    alias screen='TERM=screen screen'
+
+    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+    LIBRARY_PATH=/usr/local/lib
+fi
+
 alias ll="ls -l"
 alias la="ls -la"
 export EDITOR=/usr/bin/vim
-
-# stupid OS X
-alias screen='TERM=screen screen'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -83,14 +96,23 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-#export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
-#export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
-#
-#export GOROOT="/home/cole/go"
-#export GOARCH=amd64
-#export GOOS=linux
-#export GOBIN="/home/cole/local/bin"
+# quack
+alias ducks="du -cks"
+# cd to newest subdirectory
+alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-LIBRARY_PATH=/usr/local/lib
+# grab env vars from ssh agent
+if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
+	. $HOME/.ssh-agent
+fi
+
+alias keyon="ssh-add -t 0"
+alias keyoff="ssh-add -D"
+alias keyls="ssh-add -l"
+
+# FIXME does this break non-interactive programs?
+stty stop undef
+stty start undef
+
+# vim: et ts=4 sw=4
+

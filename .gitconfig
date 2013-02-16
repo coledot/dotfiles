@@ -3,3 +3,6 @@
 	email = cole.thompson@gmail.com
 [core]
 	editor = gvim -f
+[color]
+	ui = auto
+
