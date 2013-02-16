@@ -1,2 +1,6 @@
+if has("macunix")
+    set guifont=Bitstream\ Vera\ Sans\ Mono:h12
+endif
 
-colo zenburn
+colorscheme zenburn
+

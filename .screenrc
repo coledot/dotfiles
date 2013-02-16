@@ -4,3 +4,6 @@ autodetach on
 caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 vbell off
+
+defscrollback 1000
+
