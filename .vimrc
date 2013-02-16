@@ -12,7 +12,7 @@ set backup
 
 set undolevels=1000
 set winminheight=0
-set bs=2
+set backspace=2
 set viminfo='20,\"500
 set history=1000
 set tabstop=4
@@ -33,6 +33,9 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
 cnoremap <c-k> <Up>
 cnoremap <c-j> <Down>
 
@@ -43,12 +46,6 @@ let g:miniBufExplMaxSize = 3 " no. lines to use
 "let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
-" FIXME
-" "commatize"
-"let @c = ':1,$-1s/$/,/g
-":%s/,\n/,/g
-"'
-
 noremap <silent><Leader>/ :nohls<CR>
 
 call pathogen#infect()
@@ -56,9 +53,6 @@ call pathogen#infect()
 filetype on
 filetype plugin on
 filetype indent on
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -83,7 +77,7 @@ endif
 "imap <Left> <Esc>:help!<Cr>
 "imap <Right> <Esc>:help!<Cr>
 
-au BufRead,BufNewFile *.py set et ts=4 sw=4 foldmethod=indent foldlevel=99
+au BufRead,BufNewFile *.py set et ts=4 sw=4 fdm=indent foldlevel=99
 au BufRead,BufNewFile *.rb set et ts=2 sw=2
 
 if !has("gui_running")

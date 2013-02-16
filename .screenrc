@@ -1,9 +1,7 @@
 startup_message off
 autodetach on
 
-# FIXME which is correct?
 hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=%D %d %M %c"
-caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
 
 vbell off
 

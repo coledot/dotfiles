@@ -110,7 +110,6 @@ alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
 
-# FIXME does this break non-interactive programs?
 stty stop undef
 stty start undef
 
