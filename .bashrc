@@ -60,15 +60,15 @@ esac
 #    . ~/.bash_aliases
 #fi
 
-## enable color support of ls and also add handy aliases
-#if [ "$TERM" != "dumb" ]; then
-#	eval "`dircolors -b`"
-#	alias ls='ls --color=auto'
-#    #alias dir='ls --color=auto --format=vertical'
-#    #alias vdir='ls --color=auto --format=long'
-#fi
+# enable color support of ls and also add handy aliases
+if [ "$TERM" != "dumb" ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    #alias dir='ls --color=auto --format=vertical'
+    #alias vdir='ls --color=auto --format=long'
+fi
 
-#alias ls="ls --color"
+alias ls="ls --color"
 alias ll="ls -l"
 alias la="ls -la"
 export EDITOR=/usr/bin/vim
@@ -83,14 +83,12 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-#export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
-#export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
-#
-#export GOROOT="/home/cole/go"
-#export GOARCH=amd64
-#export GOOS=linux
-#export GOBIN="/home/cole/local/bin"
+export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
+export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-LIBRARY_PATH=/usr/local/lib
+export GOROOT="/home/cole/go"
+export GOARCH=amd64
+export GOOS=linux
+export GOBIN="/home/cole/local/bin"
+
+export LD_LIBRARY_PATH="/usr/local/lib"

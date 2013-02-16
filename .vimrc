@@ -106,3 +106,4 @@ set backupdir=~/.vim/backup/
 set backup
 
 au BufRead,BufNewFile *.rb set et ts=2 sw=2
+
