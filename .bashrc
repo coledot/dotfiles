@@ -1,9 +1,5 @@
 #! /bin/bash
 
-# FIXME? maybe it might help to use this?
-## If not running interactively, don't do anything
-#[ -z "$PS1" ] && return
-
 shopt -s checkwinsize
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -73,8 +69,11 @@ alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
 
-stty stop undef
-stty start undef
+# If not running interactively, don't do anything
+if [[ ! -z "$PS1" ]]; then
+    stty stop undef
+    stty start undef
+fi
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "trace" ]]; then
