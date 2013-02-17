@@ -39,6 +39,7 @@ xterm*|rxvt*)
 esac
 
 export EDITOR=/usr/bin/vim
+export TERM=xterm-256color
 
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
@@ -93,8 +94,10 @@ if [[ "$HOSTNAME" == "trace" ]]; then
 
     export LD_LIBRARY_PATH="/usr/local/lib"
 elif [[ "$HOSTNAME" == "detune" ]]; then
-    # stupid OS X
-    alias screen='TERM=screen screen'
+    # stupid OS X. the default version of screen that ships with OS X
+	#   doesn't have 256-color support. workaround is to install it
+	#   using homebrew
+    alias screen='/usr/local/bin/screen'
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig

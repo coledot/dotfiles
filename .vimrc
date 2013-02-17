@@ -17,6 +17,7 @@ set viminfo='20,\"500
 set history=1000
 set tabstop=4
 set shiftwidth=4
+set t_Co=256
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
@@ -29,6 +30,7 @@ set complete=.,b,u,]
 syntax enable
 
 map <c-h> <c-w>h
+" FIXME broken; <c-j> just puts me into insert mode
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
@@ -36,8 +38,8 @@ map <c-l> <c-w>l
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-cnoremap <c-k> <Up>
-cnoremap <c-j> <Down>
+"cnoremap <c-k> <Up>
+"cnoremap <c-j> <Down>
 
 let mapleader=" "
 
@@ -82,7 +84,8 @@ au BufRead,BufNewFile *.rb set et ts=2 sw=2
 
 if !has("gui_running")
   " for console only (see .gvimrc, uses zenburn in gvim)
-  colorscheme blugrine
+  "colorscheme blugrine
+  colorscheme zenburn
 endif
 
 if has("win32")
