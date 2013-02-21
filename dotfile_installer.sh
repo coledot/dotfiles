@@ -10,6 +10,11 @@ if [[ ! -d $dotfile_bkp_dir ]]; then
 fi
 
 for true_dotfile in $filelist; do
+	if [[ `basename $true_dotfile` == `basename $0` ]]; then
+		# don't symlink yourself
+		continue
+	fi
+
 	symlink_dotfile=`echo $true_dotfile | sed 's,\\.dotfiles/,,g'`
 	old_dotfile=$symlink_dotfile
 	if [[ ! -h $symlink_dotfile ]]; then
