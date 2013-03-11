@@ -116,6 +116,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
+
+	PGDATA=/usr/local/var/postgres
 fi
 
 # vim: et ts=4 sw=4
