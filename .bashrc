@@ -43,7 +43,7 @@ export TERM=xterm-256color
 
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
-	. $HOME/.ssh-agent
+    . $HOME/.ssh-agent
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -53,7 +53,7 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	. $(brew --prefix)/etc/bash_completion
+    . $(brew --prefix)/etc/bash_completion
 fi
 
 
@@ -100,11 +100,20 @@ if [[ "$HOSTNAME" == "trace" ]]; then
     export LD_LIBRARY_PATH="/usr/local/lib"
 elif [[ "$HOSTNAME" == "detune" ]]; then
     # stupid OS X. the default version of screen that ships with OS X
-	#   doesn't have 256-color support. workaround is to install it
-	#   using homebrew
+    #   doesn't have 256-color support. workaround is to install it
+    #   using homebrew
     alias screen='/usr/local/bin/screen'
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+    LIBRARY_PATH=/usr/local/lib
+elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
+    # stupid OS X. the default version of screen that ships with OS X
+    #   doesn't have 256-color support. workaround is to install it
+    #   using homebrew
+    alias screen='/usr/local/bin/screen'
+
+    PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 fi
