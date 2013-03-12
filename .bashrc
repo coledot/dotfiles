@@ -118,6 +118,10 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     LIBRARY_PATH=/usr/local/lib
 
 	PGDATA=/usr/local/var/postgres
+
+	alias curie='  screen -X title curie   && ssh curie.inigral.com'
+	alias shulgin='screen -X title shulgin && ssh shulgin.inigral.com'
+	alias newton=' screen -X title newton  && ssh newton.inigral.com'
 fi
 
 # vim: et ts=4 sw=4
