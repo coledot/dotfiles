@@ -119,10 +119,25 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 
 	PGDATA=/usr/local/var/postgres
 
-	alias curie='  screen -X title curie   && ssh curie.inigral.com'
-	alias shulgin='screen -X title shulgin && ssh shulgin.inigral.com'
-	alias newton=' screen -X title newton  && ssh newton.inigral.com'
-	alias johnson='screen -X title johnson && ssh johnson.inigral.com'
+	alias darwin='  screen -X title darwin  && ssh darwin.inigral.com'
+	alias hubble='  screen -X title hubble  && ssh hubble.inigral.com'
+	alias teller='  screen -X title teller  && ssh teller.inigral.com'
+	alias hofmann=' screen -X title hofmann && ssh hofmann.inigral.com'
+	alias curie='   screen -X title curie   && ssh curie.inigral.com'
+
+	alias einstein='screen -X title einstein && ssh einstein.inigral.com'
+	alias turing='  screen -X title turing   && ssh turing.inigral.com'
+	alias tesla='   screen -X title tesla    && ssh tesla.inigral.com'
+	alias newton='  screen -X title newton   && ssh newton.inigral.com'
+	alias goodall=' screen -X title goodall  && ssh goodall.inigral.com'
+	alias shulgin=' screen -X title shulgin  && ssh shulgin.inigral.com'
+	alias euclid='  screen -X title euclid   && ssh euclid.inigral.com'
+	alias kamen='   screen -X title kamen    && ssh kamen.inigral.com'
+	alias johnson=' screen -X title johnson  && ssh johnson.inigral.com'
+	alias sagan='   screen -X title sagan    && ssh sagan.inigral.com'
+	alias euler='   screen -X title euler    && ssh euler.inigral.com'
+	alias crick='   screen -X title crick    && ssh crick.inigral.com'
+	alias bohr='    screen -X title bohr     && ssh bohr.inigral.com'
 fi
 
 # vim: et ts=4 sw=4
