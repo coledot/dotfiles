@@ -88,10 +88,10 @@ if [[ "$HOSTNAME" == "trace" ]]; then
         eval "`dircolors -b`"
         alias ls='ls --color=auto'
     fi
-    
+
     export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
     export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
-    
+
     export GOROOT="/home/cole/go"
     export GOARCH=amd64
     export GOOS=linux
@@ -122,7 +122,20 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 	alias curie='  screen -X title curie   && ssh curie.inigral.com'
 	alias shulgin='screen -X title shulgin && ssh shulgin.inigral.com'
 	alias newton=' screen -X title newton  && ssh newton.inigral.com'
+	alias johnson='screen -X title johnson && ssh johnson.inigral.com'
 fi
 
 # vim: et ts=4 sw=4
 
+# TODO:
+# Show the current branch name in your bash prompt
+#Note this requires the Bash autocompletion script above
+#
+#Add this to ~/.bash_profile:
+#
+#export GIT_PS1_SHOWDIRTYSTATE=true
+#source /usr/local/etc/bash_completion.d/git-prompt.sh
+#Now put $(__git_ps1) in your prompt wherever you want the git branch name to appear. Here's a simple example:
+#
+#export PS1='\h:\W\$(__git_ps1) \u\$ '
+#You can set the PS1 environment variable in ~/.bash_profile
