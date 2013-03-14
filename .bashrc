@@ -115,11 +115,14 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 
 	PGDATA=/usr/local/var/postgres
 
-	alias darwin='  screen -X title darwin  && ssh darwin.inigral.com'
-	alias hubble='  screen -X title hubble  && ssh hubble.inigral.com'
-	alias teller='  screen -X title teller  && ssh teller.inigral.com'
-	alias hofmann=' screen -X title hofmann && ssh hofmann.inigral.com'
-	alias curie='   screen -X title curie   && ssh curie.inigral.com'
+	alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
+	alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+
+	alias darwin='  screen -X title darwin   && ssh darwin.inigral.com'
+	alias hubble='  screen -X title hubble   && ssh hubble.inigral.com'
+	alias teller='  screen -X title teller   && ssh teller.inigral.com'
+	alias hofmann=' screen -X title hofmann  && ssh hofmann.inigral.com'
+	alias curie='   screen -X title curie    && ssh curie.inigral.com'
 
 	alias einstein='screen -X title einstein && ssh einstein.inigral.com'
 	alias turing='  screen -X title turing   && ssh turing.inigral.com'
