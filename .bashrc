@@ -115,14 +115,14 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 
 	PGDATA=/usr/local/var/postgres
 
-	alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
-	alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+	#alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
+	#alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
 
 	while read line; do
 		echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
 		if [[ $? -ne 0 ]]; then
 			host=$line
-			alias $host="screen -X $host && ssh $host.inigral.com"
+			alias $host="screen -X title $host && ssh $host.inigral.com"
 		fi
 	done < ~/.inigral_ssh_aliases
 fi
