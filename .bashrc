@@ -19,15 +19,13 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-xterm-color)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
-    ;;
-*)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
-    ;;
-esac
+if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+	export GIT_PS1_SHOWDIRTYSTATE=true
+	source /usr/local/etc/bash_completion.d/git-prompt.sh
+	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+else
+	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -55,8 +53,6 @@ fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
-
-
 
 # TODO use this
 # aliases are defined in a separate file
@@ -138,19 +134,9 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 	alias euler='   screen -X title euler    && ssh euler.inigral.com'
 	alias crick='   screen -X title crick    && ssh crick.inigral.com'
 	alias bohr='    screen -X title bohr     && ssh bohr.inigral.com'
+
+	alias nas2='    screen -X title nas2     && ssh nas2.inigral.com'
 fi
 
 # vim: et ts=4 sw=4
 
-# TODO:
-# Show the current branch name in your bash prompt
-#Note this requires the Bash autocompletion script above
-#
-#Add this to ~/.bash_profile:
-#
-#export GIT_PS1_SHOWDIRTYSTATE=true
-#source /usr/local/etc/bash_completion.d/git-prompt.sh
-#Now put $(__git_ps1) in your prompt wherever you want the git branch name to appear. Here's a simple example:
-#
-#export PS1='\h:\W\$(__git_ps1) \u\$ '
-#You can set the PS1 environment variable in ~/.bash_profile
