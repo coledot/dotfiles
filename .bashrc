@@ -100,9 +100,11 @@ if [[ "$HOSTNAME" == "trace" ]]; then
     export LD_LIBRARY_PATH="/usr/local/lib"
 elif [[ "$HOSTNAME" == "detune" ]]; then
     # stupid OS X. the default version of screen that ships with OS X
-	#   doesn't have 256-color support. workaround is to install it
-	#   using homebrew
+    #   doesn't have 256-color support. workaround is to install it
+    #   using homebrew
     alias screen='/usr/local/bin/screen'
+
+    alias git='/usr/local/bin/git'
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
