@@ -1,8 +1,42 @@
 [user]
 	name = Cole Thompson
-	email = cole.thompson@gmail.com
+	email = cole@inigral.com
 [core]
 	editor = gvim -f
+
 [color]
 	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[apply]
+	whitespace = nowarn
+
+[push]
+	default = simple
+[alias]
+	aa = add --all
+	st = status
+	stat = status
+	co = checkout
+	br = branch
+	ci = commit
+	com = commit
+	df = difftool
+	lg = log --oneline
+	mg = merge
+	me = merge
 

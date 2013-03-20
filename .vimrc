@@ -79,8 +79,8 @@ endif
 "imap <Left> <Esc>:help!<Cr>
 "imap <Right> <Esc>:help!<Cr>
 
-au BufRead,BufNewFile *.py set et ts=4 sw=4 fdm=indent foldlevel=99
-au BufRead,BufNewFile *.rb set et ts=2 sw=2
+au BufRead,BufNewFile *.py       set et ts=4 sw=4 fdm=indent foldlevel=99
+au BufRead,BufNewFile *.rb,*.erb set et ts=2 sw=2
 
 if !has("gui_running")
   " for console only (see .gvimrc, uses zenburn in gvim)

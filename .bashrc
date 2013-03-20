@@ -19,15 +19,13 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-xterm-color)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
-    ;;
-*)
-    export PS1='\[\033[01;32m\]\u@\[\033[01;37m\]\h\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
-    ;;
-esac
+if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+	export GIT_PS1_SHOWDIRTYSTATE=true
+	source /usr/local/etc/bash_completion.d/git-prompt.sh
+	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+else
+	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+fi
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -43,7 +41,7 @@ export TERM=xterm-256color
 
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
-	. $HOME/.ssh-agent
+    . $HOME/.ssh-agent
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -53,10 +51,8 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-	. $(brew --prefix)/etc/bash_completion
+    . $(brew --prefix)/etc/bash_completion
 fi
-
-
 
 # TODO use this
 # aliases are defined in a separate file
@@ -88,10 +84,10 @@ if [[ "$HOSTNAME" == "trace" ]]; then
         eval "`dircolors -b`"
         alias ls='ls --color=auto'
     fi
-    
+
     export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
     export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
-    
+
     export GOROOT="/home/cole/go"
     export GOARCH=amd64
     export GOOS=linux
@@ -109,6 +105,28 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
+elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
+    # stupid OS X. the default version of screen that ships with OS X
+    #   doesn't have 256-color support. workaround is to install it
+    #   using homebrew
+    alias screen='/usr/local/bin/screen'
+
+    PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
+    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+    LIBRARY_PATH=/usr/local/lib
+
+	PGDATA=/usr/local/var/postgres
+
+	#alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
+	#alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+
+	while read line; do
+		echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
+		if [[ $? -ne 0 ]]; then
+			host=$line
+			alias $host="screen -X title $host && ssh $host.inigral.com"
+		fi
+	done < ~/.inigral_ssh_aliases
 fi
 
 # vim: et ts=4 sw=4
