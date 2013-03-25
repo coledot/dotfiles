@@ -1,5 +1,10 @@
 #! /bin/bash
 
+# FIXME error messages when using scp to cole@cole_inigral:
+#       /Users/cole/.bashrc: line 53: brew: command not found
+#       stty: stdin isn't a terminal
+#       stty: stdin isn't a terminal
+
 shopt -s checkwinsize
 
 # don't put duplicate lines in the history. See bash(1) for more options
