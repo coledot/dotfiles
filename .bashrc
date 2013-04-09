@@ -105,6 +105,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
+
+    PGDATA=/usr/local/var/postgres
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # stupid OS X. the default version of screen that ships with OS X
     #   doesn't have 256-color support. workaround is to install it
@@ -115,18 +117,18 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
-	PGDATA=/usr/local/var/postgres
+    PGDATA=/usr/local/var/postgres
 
-	#alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
-	#alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+    #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
+    #alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
 
-	while read line; do
-		echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
-		if [[ $? -ne 0 ]]; then
-			host=$line
-			alias $host="screen -X title $host && ssh $host.inigral.com"
-		fi
-	done < ~/.inigral_ssh_aliases
+    while read line; do
+        echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
+        if [[ $? -ne 0 ]]; then
+            host=$line
+            alias $host="screen -X title $host && ssh $host.inigral.com"
+        fi
+    done < ~/.inigral_ssh_aliases
 fi
 
 # vim: et ts=4 sw=4
