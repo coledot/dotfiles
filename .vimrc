@@ -41,6 +41,9 @@ map Q gq
 "cnoremap <c-k> <Up>
 "cnoremap <c-j> <Down>
 
+" needed to use Vim as a man page reader
+let $PAGER=''
+
 let mapleader=" "
 
 let g:miniBufExplSplitBelow = 1 " MiniBufExplorer on bottom

@@ -44,6 +44,13 @@ esac
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 
+# needed to use Vim as a man pager
+# FIXME breaks `git diff`
+#export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+#    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+#    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+#    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
+
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
     . $HOME/.ssh-agent
