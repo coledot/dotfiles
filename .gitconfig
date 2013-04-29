@@ -22,11 +22,13 @@
 	added = yellow
 	changed = green
 	untracked = cyan
+
 [apply]
 	whitespace = nowarn
 
 [push]
 	default = simple
+
 [alias]
 	aa = add --all
 	st = status
@@ -41,4 +43,13 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr, %cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+[diff]
+	tool = vim-wrapper-script
+
+[difftool "vim-wrapper-script"]
+	cmd = ~/scripts/git_vimdiff_wrapper.sh $LOCAL $REMOTE
+
+[difftool]
+	prompt = false
 
