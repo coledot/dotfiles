@@ -2,7 +2,8 @@
 	name = Cole Thompson
 	email = cole@inigral.com
 [core]
-	editor = gvim -f
+	# TODO gvim if ui available
+	editor = vim -f
 
 [color]
 	ui = auto
