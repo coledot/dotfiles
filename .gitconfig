@@ -47,6 +47,7 @@
 
 [diff]
 	tool = vim-wrapper-script
+	algorithm = patience
 
 [difftool "vim-wrapper-script"]
 	cmd = ~/scripts/git_vimdiff_wrapper.sh $LOCAL $REMOTE
