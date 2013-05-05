@@ -5,7 +5,7 @@ hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=%D %d %M %c"
 
 vbell off
 
-defscrollback 1000
+defscrollback 1000000
 
 bind k focus up
 bind ^k focus up

@@ -38,8 +38,8 @@ map <c-l> <c-w>l
 " Don't use Ex mode, use Q for formatting
 map Q gq
 
-"cnoremap <c-k> <Up>
-"cnoremap <c-j> <Down>
+" needed to use Vim as a man page reader
+let $PAGER=''
 
 let mapleader=" "
 
@@ -49,6 +49,9 @@ let g:miniBufExplMaxSize = 3 " no. lines to use
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
 noremap <silent><Leader>/ :nohls<CR>
+
+" for command-t plugin - remap default file window dialog with split-window file dialog
+noremap <silent><Leader>t :split<CR>:CommandT<CR>
 
 call pathogen#infect()
 
@@ -69,18 +72,10 @@ if isdirectory(expand("$VIMRUNTIME/ftplugin"))
   filetype plugin on
 endif
 
-" use this to wean off of arrow key usage
-"map <Up> :help!<Cr>
-"map <Down> :help!<Cr>
-"map <Left> :help!<Cr>
-"map <Right> :help!<Cr>
-"imap <Up> <Esc>:help!<Cr>
-"imap <Down> <Esc>:help!<Cr>
-"imap <Left> <Esc>:help!<Cr>
-"imap <Right> <Esc>:help!<Cr>
-
-au BufRead,BufNewFile *.py       set et ts=4 sw=4 fdm=indent foldlevel=99
-au BufRead,BufNewFile *.rb,*.erb set et ts=2 sw=2
+au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
+au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
+" puppet
+au BufRead,BufNewFile *.pp              set et ts=2 sw=2
 
 if !has("gui_running")
   " for console only (see .gvimrc, uses zenburn in gvim)

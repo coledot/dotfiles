@@ -1,5 +1,10 @@
 #! /bin/bash
 
+# FIXME error messages when using scp to cole@cole_inigral:
+#       /Users/cole/.bashrc: line 53: brew: command not found
+#       stty: stdin isn't a terminal
+#       stty: stdin isn't a terminal
+
 shopt -s checkwinsize
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -38,6 +43,13 @@ esac
 
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
+
+# needed to use Vim as a man pager
+# FIXME breaks `git diff`
+#export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
+#    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
+#    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
+#    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
@@ -118,7 +130,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 	PGDATA=/usr/local/var/postgres
 
 	#alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
-	#alias scapp_on=' sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+	#alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+	#alias scapp_restart='scapp_off && scapp_on'
 
 	while read line; do
 		echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null

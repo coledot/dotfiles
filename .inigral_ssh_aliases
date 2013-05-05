@@ -5,6 +5,7 @@ teller
 hofmann
 curie
 nas2
+nas3
 
 # virtual
 einstein
@@ -20,3 +21,9 @@ sagan
 euler
 crick
 bohr
+nye
+
+# nonstandard virtual
+# TODO remove
+snorkel
+
