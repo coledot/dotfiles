@@ -112,6 +112,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     #   using homebrew
     alias screen='/usr/local/bin/screen'
 
+    alias git='/usr/local/bin/git'
+
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
