@@ -6,3 +6,5 @@ https://github.com/tpope/vim-surround.git
 https://github.com/jnurmine/Zenburn.git
 git@github.com:wincent/Command-T.git
 git@github.com:puppetlabs/puppet-syntax-vim.git
+git@github.com:tjohn/vim-obsidian.git
+git@github.com:altercation/vim-colors-solarized.git
