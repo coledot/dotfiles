@@ -9,6 +9,7 @@ set noequalalways
 set noexpandtab
 set modeline
 set backup
+set autoread
 
 set undolevels=1000
 set winminheight=0
@@ -111,6 +112,7 @@ elseif has("unix")
   set nocompatible
 
   set backupdir=~/.vim/backup
+  set directory=~/.vim/swaps,. " condense swap files in one dir
 endif
 
 " vim: et ts=2 sw=2

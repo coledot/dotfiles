@@ -1,5 +1,5 @@
 --smart-case
 # FIXME keeps printing a warning every time ack is run
-#--type-add
-#puppet=.pp
+--type-add
+puppet=.pp
 
