@@ -77,6 +77,8 @@ au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
 au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
 " puppet
 au BufRead,BufNewFile *.pp              set et ts=2 sw=2
+" one of vim, cron, or OSX isn't so bright... take your pick.
+au BufEnter /private/tmp/crontab.*      setl backupcopy=yes
 
 if !has("gui_running")
   " for console only (see .gvimrc, uses zenburn in gvim)
