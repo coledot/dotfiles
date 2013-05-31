@@ -50,9 +50,9 @@ let g:miniBufExplMaxSize = 3 " no. lines to use
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
 noremap <silent><Leader>/ :nohls<CR>
-
 " for command-t plugin - remap default file window dialog with split-window file dialog
 noremap <silent><Leader>t :split<CR>:CommandT<CR>
+noremap <silent><Leader>a :Ack 
 
 call pathogen#infect()
 
