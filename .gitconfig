@@ -44,7 +44,7 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr, %cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 	#lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	#lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	dfls = diff master --name-only
+	dfls = diff --name-only
 
 [diff]
 	tool = vim-wrapper-script

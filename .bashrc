@@ -1,10 +1,5 @@
 #! /bin/bash
 
-# FIXME error messages when using scp to cole@cole_inigral:
-#       /Users/cole/.bashrc: line 53: brew: command not found
-#       stty: stdin isn't a terminal
-#       stty: stdin isn't a terminal
-
 shopt -s checkwinsize
 
 # don't put duplicate lines in the history. See bash(1) for more options
@@ -25,11 +20,11 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-	export GIT_PS1_SHOWDIRTYSTATE=true
-	source /usr/local/etc/bash_completion.d/git-prompt.sh
-	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 else
-	export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -62,7 +57,7 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
+if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
@@ -84,7 +79,8 @@ alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
 
 # If not running interactively, don't do anything
-if [[ ! -z "$PS1" ]]; then
+tty -s
+if [[ $? -eq 0 ]]; then
     stty stop undef
     stty start undef
 fi
@@ -125,15 +121,19 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     #   using homebrew
     alias screen='/usr/local/bin/screen'
 
-    PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin
+    alias vgr="vagrant"
+    # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/)
+    alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
+
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.rvm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
     PGDATA=/usr/local/var/postgres
 
-	#alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
-	#alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
-	#alias scapp_restart='scapp_off && scapp_on'
+    #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
+    #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
+    #alias scapp_restart='scapp_off && scapp_on'
 
     while read line; do
         echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
@@ -145,4 +145,3 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 fi
 
 # vim: et ts=4 sw=4
-
