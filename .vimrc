@@ -1,15 +1,15 @@
-set showcmd
-set showmode
-set number
-set incsearch
 set autoindent
-set ruler
+set autoread
+set backup
 set cindent
 set noequalalways
 set noexpandtab
+set incsearch
 set modeline
-set backup
-set autoread
+set number
+set ruler
+set showcmd
+set showmode
 
 set undolevels=1000
 set winminheight=0
@@ -54,8 +54,8 @@ noremap <silent><Leader>/ :nohls<CR>
 noremap <silent><Leader>t :split<CR>:CommandT<CR>
 noremap <silent><Leader>a :Ack 
 
+filetype off
 call pathogen#infect()
-
 filetype on
 filetype plugin on
 filetype indent on
