@@ -3,13 +3,15 @@ set autoread
 set backup
 set cindent
 set noequalalways
-set noexpandtab
+set expandtab
 set incsearch
+set list                                                     " show trailing whitespace
 set modeline
 set number
 set ruler
 set showcmd
 set showmode
+set smartcase
 
 set undolevels=1000
 set winminheight=0
@@ -19,6 +21,9 @@ set history=1000
 set tabstop=4
 set shiftwidth=4
 set t_Co=256
+set laststatus=2
+set clipboard=unnamed                                        " yank and paste with the system clipboard
+set directory-=.                                             " don't store swapfiles in the current directory
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
@@ -30,11 +35,11 @@ set complete=.,b,u,]
 
 syntax enable
 
-map <c-h> <c-w>h
+noremap <C-h> <C-w>h
 " FIXME broken; <c-j> just puts me into insert mode
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -51,8 +56,10 @@ let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
 noremap <silent><Leader>/ :nohls<CR>
 " for command-t plugin - remap default file window dialog with split-window file dialog
-noremap <silent><Leader>t :split<CR>:CommandT<CR>
+noremap <silent><Leader>t :CommandT<CR>
 noremap <silent><Leader>a :Ack 
+noremap <silent><Leader>d :NERDTreeToggle
+noremap <silent><Leader>f :NERDTreeFind
 
 filetype off
 call pathogen#infect()
@@ -76,6 +83,7 @@ endif
 au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
 au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
 au BufRead,BufNewFile *.js,*.js.coffee  set et ts=2 sw=2
+au BufRead,BufNewFile *.md              set filetype=markdown
 " puppet
 au BufRead,BufNewFile *.pp              set et ts=2 sw=2
 " one of vim, cron, or OSX isn't so bright... take your pick.
