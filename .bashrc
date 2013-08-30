@@ -22,9 +22,9 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 else
-    export PS1='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -57,6 +57,7 @@ fi
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
+# add'l completion provided by brew
 if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
@@ -109,6 +110,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     alias screen='/usr/local/bin/screen'
 
     alias git='/usr/local/bin/git'
+    # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
+    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 cole@cole_inigral"
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
@@ -122,10 +125,10 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     alias screen='/usr/local/bin/screen'
 
     alias vgr="vagrant"
-    # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/)
+    # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
 
-    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.rvm/bin
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
