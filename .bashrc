@@ -78,6 +78,7 @@ alias la="ls -la"
 alias ducks="du -cks"
 # cd to newest subdirectory
 alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
+alias qc="~/scripts/qc.sh"
 
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
@@ -113,6 +114,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     alias screen='/usr/local/bin/screen'
 
     alias git='/usr/local/bin/git'
+    # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
+    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
