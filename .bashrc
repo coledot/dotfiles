@@ -112,7 +112,7 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
-    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 cole@cole_inigral"
+    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
 
     PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
