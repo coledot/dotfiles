@@ -74,6 +74,7 @@ alias la="ls -la"
 alias ducks="du -cks"
 # cd to newest subdirectory
 alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
+alias qc="~/scripts/qc.sh"
 
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
