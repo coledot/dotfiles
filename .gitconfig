@@ -1,59 +1,59 @@
 [user]
-	name = Cole Thompson
-	email = cole@inigral.com
+    name = Cole Thompson
+    email = cole@uversity.com
 [core]
-	# TODO gvim if ui available
-	editor = vim -f
+    # TODO gvim if ui available
+    editor = vim -f
 
 [color]
-	ui = auto
-	branch = auto
-	diff = auto
-	status = auto
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 [color "diff"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 [apply]
-	whitespace = nowarn
+    whitespace = nowarn
 
 [push]
-	default = simple
+    default = simple
 
 [alias]
-	aa = add --all
-	st = status
-	stat = status
-	co = checkout
-	br = branch
-	#ci = commit
-	com = commit
-	#df = difftool
-	#mg = merge
-	#me = merge
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr, %cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
-	#lol = log --graph --decorate --pretty=oneline --abbrev-commit
-	#lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-	dfls = diff --name-only
-	graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
+    aa = add --all
+    st = status
+    stat = status
+    co = checkout
+    br = branch
+    #ci = commit
+    com = commit
+    #df = difftool
+    #mg = merge
+    #me = merge
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr, %cd) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+    #lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    #lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    dfls = diff --name-only
+    graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
 
 [diff]
-	tool = vim-wrapper-script
-	algorithm = patience
+    tool = vim-wrapper-script
+    algorithm = patience
 
 [difftool "vim-wrapper-script"]
-	cmd = ~/scripts/git_vimdiff_wrapper.sh $LOCAL $REMOTE
+    cmd = ~/scripts/git_vimdiff_wrapper.sh $LOCAL $REMOTE
 
 [difftool]
-	prompt = false
+    prompt = false
 
