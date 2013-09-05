@@ -119,6 +119,14 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     LIBRARY_PATH=/usr/local/lib
 
     PGDATA=/usr/local/var/postgres
+
+    SSHAGENT=/usr/bin/ssh-agent
+    SSHAGENTARGS="-s"
+    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+        eval `$SSHAGENT $SSHAGENTARGS`
+        trap "kill $SSH_AGENT_PID" 0
+    fi
+
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # stupid OS X. the default version of screen that ships with OS X
     #   doesn't have 256-color support. workaround is to install it
