@@ -62,7 +62,7 @@ if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-# TODO use this
+# FIXME use this
 # aliases are defined in a separate file
 #if [ -f ~/.bash_aliases ]; then
 #    . ~/.bash_aliases
@@ -129,7 +129,9 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
 
-    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin
+    GOROOT=/usr/local/go
+    export GOPATH=$HOME/.go:
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH:${GOPATH//://bin:}/bin:$HOME/local/bin:$HOME/.rvm/bin:/usr/local/share/npm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -142,6 +144,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
         trap "kill $SSH_AGENT_PID" 0
     fi
 
+    alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
+
     #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
     #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
     #alias scapp_restart='scapp_off && scapp_on'
@@ -153,6 +157,12 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
             alias $host="screen -X title $host && ssh $host.inigral.com"
         fi
     done < ~/.inigral_ssh_aliases
+
+    export RUBY_HEAP_MIN_SLOTS=1000000
+    export RUBY_HEAP_SLOTS_INCREMENT=1000000
+    export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+    export RUBY_GC_MALLOC_LIMIT=100000000
+    export RUBY_HEAP_FREE_MIN=500000
 fi
 
 # vim: et ts=4 sw=4
