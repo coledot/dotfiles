@@ -1,6 +1,6 @@
 [user]
     name = Cole Thompson
-    email = cole@uversity.com
+    email = cole.thompson@gmail.com
 [core]
     # TODO gvim if ui available
     editor = vim -f
