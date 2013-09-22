@@ -20,9 +20,9 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
 else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -66,9 +66,11 @@ fi
 #    . ~/.bash_aliases
 #fi
 
+# TODO alias ls to, ~50% of the time, instead print "stop relying on ls so damn much" to stderr & return 1
 alias ll="ls -l"
 alias la="ls -la"
 alias ltr="ls -ltr"
+alias git="no. use one of the aliases"
 alias gcl="git clone"
 alias gco="git checkout"
 alias glg="git lg"
