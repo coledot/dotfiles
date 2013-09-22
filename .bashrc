@@ -60,34 +60,9 @@ if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-# FIXME use this
-# aliases are defined in a separate file
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
-
-# TODO alias ls to, ~50% of the time, instead print "stop relying on ls so damn much" to stderr & return 1
-alias ll="ls -l"
-alias la="ls -la"
-alias ltr="ls -ltr"
-alias gcl="git clone"
-alias gco="git checkout"
-alias glg="git lg"
-alias glo="git log"
-alias gst="git status"
-alias gdf="git diff"
-alias gad="git add ."
-alias gcm="git commit -m"
-alias grm="git rm"
-alias gmg="git merge"
-# quack
-alias ducks="du -cks"
-# cd to newest subdirectory
-alias qc="~/scripts/qc.sh"
-
-alias keyon="ssh-add -t 0"
-alias keyoff="ssh-add -D"
-alias keyls="ssh-add -l"
+if [ -f $HOME/.bash_aliases ]; then
+    . $HOME/.bash_aliases
+fi
 
 # If not running interactively, don't do anything
 tty -s
@@ -123,7 +98,7 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
     alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
     alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@localhost:5055"
-    alias teleclient="tele -client -in=localhost:5055 -out=cole_inigral:5055"
+    alias teleclientssh="tele -client -in=localhost:5055 -out=cole_inigral:5055"
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
@@ -145,12 +120,10 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     #   doesn't have 256-color support. workaround is to install it
     #   using homebrew
     alias screen='/usr/local/bin/screen'
-
-    alias vgr="vagrant"
     # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
 
-    alias teleserver="tele -server -in=localhost:22 -out=10.42.0.143:5055"
+    alias teleserverssh="tele -server -in=localhost:22 -out=10.42.0.143:5055"
 
     GOROOT=/usr/local/go
     export GOPATH=$HOME/.go:
