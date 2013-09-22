@@ -5,7 +5,6 @@ set cindent
 set noequalalways
 set expandtab
 set incsearch
-set list                                                     " show trailing whitespace
 set modeline
 set number
 set ruler
