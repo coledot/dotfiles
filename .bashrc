@@ -81,6 +81,8 @@ alias gad="git add ."
 alias gcm="git commit -m"
 alias grm="git rm"
 alias gmg="git merge"
+alias gll="git pull"
+alias gsh="git push"
 # quack
 alias ducks="du -cks"
 # cd to newest subdirectory
