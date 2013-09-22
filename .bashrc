@@ -70,7 +70,6 @@ fi
 alias ll="ls -l"
 alias la="ls -la"
 alias ltr="ls -ltr"
-alias git="no. use one of the aliases"
 alias gcl="git clone"
 alias gco="git checkout"
 alias glg="git lg"
