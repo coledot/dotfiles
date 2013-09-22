@@ -129,6 +129,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
 
+    alias teleserver="tele -server -in=localhost:22 -out=10.42.0.143:5055"
+
     GOROOT=/usr/local/go
     export GOPATH=$HOME/.go:
     PATH=/usr/local/bin:/usr/local/sbin:$PATH:${GOPATH//://bin:}/bin:$HOME/local/bin:$HOME/.rvm/bin:/usr/local/share/npm/bin
@@ -145,6 +147,9 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     fi
 
     alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
+
+    alias pspec='rake parallel:spec; cat log/parallel_summary.log'
+    alias fpspec='rake parallel:setup; rake parallel:spec; cat log/parallel_summary.log'
 
     #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
     #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'

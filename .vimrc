@@ -34,6 +34,12 @@ set complete=.,b,u,]
 
 syntax enable
 
+" tabs are something I'm trying to phase out, and EOL whitespace is a big peeve, so have it highlight when either happens
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\|\t/
+
+" easy navigation
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
