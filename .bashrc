@@ -2,10 +2,8 @@
 
 shopt -s checkwinsize
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
-# ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
+export HISTSIZE=5000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -22,9 +20,9 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
 else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -68,12 +66,25 @@ fi
 #    . ~/.bash_aliases
 #fi
 
+# TODO alias ls to, ~50% of the time, instead print "stop relying on ls so damn much" to stderr & return 1
 alias ll="ls -l"
 alias la="ls -la"
+alias ltr="ls -ltr"
+alias git="no. use one of the aliases"
+alias gcl="git clone"
+alias gco="git checkout"
+alias glg="git lg"
+alias glo="git log"
+alias gst="git status"
+alias gdf="git diff"
+alias gad="git add ."
+alias gcm="git commit -m"
+alias grm="git rm"
+alias gmg="git merge"
 # quack
 alias ducks="du -cks"
 # cd to newest subdirectory
-alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
+alias qc="~/scripts/qc.sh"
 
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
@@ -111,13 +122,24 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
-    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 cole@cole_inigral"
+    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
+    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@localhost:5055"
+    alias teleclient="tele -client -in=localhost:5055 -out=cole_inigral:5055"
 
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    GOROOT=/usr/local/go
+    GOPATH=$HOME/.go:$HOME/.go
+    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
     PGDATA=/usr/local/var/postgres
+
+    SSHAGENT=/usr/bin/ssh-agent
+    SSHAGENTARGS="-s"
+    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+        eval `$SSHAGENT $SSHAGENTARGS`
+        trap "kill $SSH_AGENT_PID" 0
+    fi
 
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # stupid OS X. the default version of screen that ships with OS X
