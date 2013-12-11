@@ -23,7 +23,7 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;34m\]\w\[\033[01;37m\]\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]$(__git_ps1) \$ \[\033[00m\]'
 else
     export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
@@ -100,7 +100,7 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
     alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
-    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@localhost:5055"
+    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y -p 5055 cole@localhost"
     alias teleclientssh="tele -client -in=localhost:5055 -out=cole_inigral:5055"
 
     GOROOT=/usr/local/go
