@@ -3,7 +3,6 @@ alias ll="ls -l"
 alias la="ls -la"
 alias ltr="ls -ltr"
 
-# TODO figure out some scheme to wean usage off of pure-git commands
 alias gcl="git clone"
 alias gco="git checkout"
 alias glg="git lg"
@@ -12,10 +11,15 @@ alias gst="git status"
 alias gdf="git diff"
 alias gad="git add"
 alias gcm="git commit -m"
+alias grs="git reset"
 alias grm="git rm"
 alias gmg="git merge"
 alias gll="git pull"
 alias gsh="git push"
+alias gbl="git blame"
+
+alias gash="git stash"
+alias gcod="git checkout -- ."
 
 alias qc="~/scripts/qc.sh"
 

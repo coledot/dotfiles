@@ -5,6 +5,9 @@ shopt -s checkwinsize
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
 
+# disable xon/off (annoying)
+stty -ixon
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
