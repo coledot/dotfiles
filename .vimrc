@@ -5,7 +5,6 @@ set cindent
 set noequalalways
 set expandtab
 set incsearch
-set list                                                     " show trailing whitespace
 set modeline
 set number
 set ruler
@@ -35,11 +34,18 @@ set complete=.,b,u,]
 
 syntax enable
 
+" tabs are something I'm trying to phase out, and EOL whitespace is a big peeve, so have it highlight when either happens
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$\|\t/
+
+" easy navigation
 noremap <C-h> <C-w>h
-" FIXME broken; <c-j> just puts me into insert mode
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
+noremap <C-_> <C-w>_
+"noremap <C-=> <C-w>=
 
 " Don't use Ex mode, use Q for formatting
 map Q gq

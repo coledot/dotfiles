@@ -2,10 +2,8 @@
 
 shopt -s checkwinsize
 
-# don't put duplicate lines in the history. See bash(1) for more options
-export HISTCONTROL=ignoredups
-# ... and ignore same sucessive entries.
 export HISTCONTROL=ignoreboth
+export HISTSIZE=5000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -22,9 +20,9 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]$(__git_ps1)\n\[\033[01;34m\]\w\[\033[01;37m\]\n\$ \[\033[00m\]'
 else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[01;30m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
 
 # If this is an xterm set the title to user@host:dir
@@ -62,23 +60,9 @@ if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-# TODO use this
-# aliases are defined in a separate file
-#if [ -f ~/.bash_aliases ]; then
-#    . ~/.bash_aliases
-#fi
-
-alias ll="ls -l"
-alias la="ls -la"
-# quack
-alias ducks="du -cks"
-# cd to newest subdirectory
-alias cdn="cd \`ls -ptr | grep '/' | tail -n 1\`"
-alias qc="~/scripts/qc.sh"
-
-alias keyon="ssh-add -t 0"
-alias keyoff="ssh-add -D"
-alias keyls="ssh-add -l"
+if [ -f $HOME/.bash_aliases ]; then
+    . $HOME/.bash_aliases
+fi
 
 # If not running interactively, don't do anything
 tty -s
@@ -113,8 +97,12 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
     alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
+    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@localhost:5055"
+    alias teleclientssh="tele -client -in=localhost:5055 -out=cole_inigral:5055"
 
-    PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    GOROOT=/usr/local/go
+    GOPATH=$HOME/.go:$HOME/.go
+    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -132,12 +120,14 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     #   doesn't have 256-color support. workaround is to install it
     #   using homebrew
     alias screen='/usr/local/bin/screen'
-
-    alias vgr="vagrant"
     # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
 
-    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/.rvm/bin:/usr/local/share/npm/bin
+    alias teleserverssh="tele -server -in=localhost:22 -out=10.42.0.143:5055"
+
+    GOROOT=/usr/local/go
+    export GOPATH=$HOME/.go:
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH:${GOPATH//://bin:}/bin:$HOME/local/bin:$HOME/.rvm/bin:/usr/local/share/npm/bin
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -150,6 +140,11 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
         trap "kill $SSH_AGENT_PID" 0
     fi
 
+    alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
+
+    alias pspec='rake parallel:spec; cat log/parallel_summary.log'
+    alias fpspec='rake parallel:setup; rake parallel:spec; cat log/parallel_summary.log'
+
     #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
     #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
     #alias scapp_restart='scapp_off && scapp_on'
@@ -161,6 +156,12 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
             alias $host="screen -X title $host && ssh $host.inigral.com"
         fi
     done < ~/.inigral_ssh_aliases
+
+    export RUBY_HEAP_MIN_SLOTS=1000000
+    export RUBY_HEAP_SLOTS_INCREMENT=1000000
+    export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+    export RUBY_GC_MALLOC_LIMIT=100000000
+    export RUBY_HEAP_FREE_MIN=500000
 fi
 
 # vim: et ts=4 sw=4
