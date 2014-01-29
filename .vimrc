@@ -38,7 +38,6 @@ syntax enable
 " tabs are something I'm trying to phase out, and EOL whitespace is a big peeve, so have it highlight when either happens
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$\|\t/
 
 " easy navigation
 noremap <C-h> <C-w>h
@@ -88,7 +87,8 @@ if isdirectory(expand("$VIMRUNTIME/ftplugin"))
 endif
 
 au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
-au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
+au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=3
+au BufRead,BufNewFile *.rb,*.erb,*.rake match ExtraWhitespace /\s\+$\|\t/
 au BufRead,BufNewFile *.js,*.js.coffee  set et ts=2 sw=2
 au BufRead,BufNewFile *.md              set filetype=markdown
 " puppet
@@ -97,8 +97,6 @@ au BufRead,BufNewFile *.pp              set et ts=2 sw=2
 au BufEnter /private/tmp/crontab.*      setl backupcopy=yes
 
 if !has("gui_running")
-  " for console only (see .gvimrc, uses zenburn in gvim)
-  "colorscheme blugrine
   colorscheme zenburn
 endif
 

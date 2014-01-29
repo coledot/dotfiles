@@ -1,0 +1,17 @@
+#! /bin/bash
+
+if [[ ! -e `which ioreg` ]]; then
+    echo "You're not running OSX." 2>&1
+    exit 1
+fi
+
+ioreg -l | grep Capacity 1>/dev/null 2>&1
+if [[ $? -ne 0 ]]; then
+    # battery? what battery???
+    echo "N/A"
+else
+    # print remaining battery life as a %
+    pct=`ioreg -l | grep '\(Max\|Current\)Capacity' | tr '\n' ' |' | awk '{printf("%.1f\n", ($10 / $5) * 100)}'`
+    echo $pct
+fi
+

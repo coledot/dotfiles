@@ -21,8 +21,6 @@ alias gbl="git blame"
 alias gash="git stash"
 alias gcod="git checkout -- ."
 
-alias qc="~/scripts/qc.sh"
-
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"

@@ -99,13 +99,18 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
-    alias cdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y cole@cole_inigral"
+    alias cdttun="sudo ssh -i ~/.ssh/id_rsa \
+                  -L localhost:443:localhost:443 \
+                  -L localhost:5555:localhost:5555 \
+                  -Y cole@cole_inigral"
     alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y -p 5055 cole@localhost"
-    alias teleclientssh="tele -client -in=localhost:5055 -out=cole_inigral:5055"
+    alias teleclientcdt="tele -client -in=localhost:5055 -out=cole_inigral:5055"
+    alias telesshdelay="sudo ssh -i ~/.ssh/id_rsa -Y -p 5056 cole@localhost"
+    alias teleclientdelay="tele -client -in=localhost:5056 -out=delay:5055"
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
-    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin:$HOME/scripts # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -123,8 +128,12 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     #   doesn't have 256-color support. workaround is to install it
     #   using homebrew
     alias screen='/usr/local/bin/screen'
-    # access cdtvgr from the vpn (to access the app, nav directly to https://cdtvgr.canvas.schoolsapp.com/ on detune)
-    alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new -L 10.42.0.143:443:192.168.33.10:443 vagrant@192.168.33.10"
+    # access cdtvgr from the vpn (to access the app, nav directly to
+    # https://cdtvgr.canvas.schoolsapp.com/ on detune)
+    alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new \
+                  -L 10.42.0.143:443:192.168.33.10:443 \
+                  -L 10.42.0.143:5555:192.168.33.10:5555 \
+                  vagrant@192.168.33.10"
 
     alias teleserverssh="tele -server -in=localhost:22 -out=10.42.0.143:5055"
 

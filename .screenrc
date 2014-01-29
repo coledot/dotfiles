@@ -1,8 +1,6 @@
 startup_message off
 autodetach on
 
-hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=%D %d %M %c"
-
 vbell off
 
 defscrollback 10000
@@ -30,4 +28,7 @@ defbce on
 
 # needed to get rvm to work properly
 shell -${SHELL}
+
+backtick 1 60 1 $HOME/scripts/battstat
+hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=[bat:%1`%%] %D %d %M %c"
 
