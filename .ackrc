@@ -2,4 +2,5 @@
 # FIXME keeps printing a warning every time ack is run
 --type-add
 puppet=.pp
+--ignore-dir=log
 

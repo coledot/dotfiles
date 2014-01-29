@@ -23,7 +23,8 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;34m\]\w\[\033[01;37m\]\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]$(__git_ps1) \$ \[\033[00m\]'
+    # FIXME bg color is hosed after using vim
+    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
 else
     export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi

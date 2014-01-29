@@ -21,6 +21,14 @@ alias gbl="git blame"
 alias gash="git stash"
 alias gcod="git checkout -- ."
 
+alias gadcm="git add . && git commit -m"
+
+alias railc="rails c"
+
+# deploy the current branch to staging
+# FIXME doesn't work if cwd isn't part of a git repo
+#alias stagedis="cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=`git rev-parse --abbrev-ref HEAD`"
+
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
