@@ -5,9 +5,6 @@ shopt -s checkwinsize
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
 
-# disable xon/off (annoying)
-stty -ixon
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -70,8 +67,11 @@ fi
 # If not running interactively, don't do anything
 tty -s
 if [[ $? -eq 0 ]]; then
-    stty stop undef
-    stty start undef
+  # disable xon/off (annoying)
+  stty stop undef
+  stty start undef
+  stty -ixon
+  stty -ixoff
 fi
 
 # host-specific shenanigans. try to keep this to a minimum
@@ -99,11 +99,16 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
+    alias cdtssh="sudo ssh -i ~/.ssh/id_rsa \
+                  -Y cole@cole_inigral"
     alias cdttun="sudo ssh -i ~/.ssh/id_rsa \
                   -L localhost:443:localhost:443 \
                   -L localhost:5555:localhost:5555 \
                   -Y cole@cole_inigral"
-    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa -L localhost:443:localhost:443 -Y -p 5055 cole@localhost"
+    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa \
+                  -L localhost:443:localhost:443 \
+                  -L localhost:5555:localhost:5555 \
+                  -Y -p 5055 cole@localhost"
     alias teleclientcdt="tele -client -in=localhost:5055 -out=cole_inigral:5055"
     alias telesshdelay="sudo ssh -i ~/.ssh/id_rsa -Y -p 5056 cole@localhost"
     alias teleclientdelay="tele -client -in=localhost:5056 -out=delay:5055"
