@@ -23,7 +23,8 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    export PS1='\[\033[01;34m\]\w\[\033[01;37m\]\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]$(__git_ps1) \$ \[\033[00m\]'
+    # FIXME bg color is hosed after using vim
+    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
 else
     export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
 fi
@@ -74,6 +75,10 @@ if [[ $? -eq 0 ]]; then
     stty start undef
 fi
 
+if [[ -d $HOME/scripts ]]; then
+    export PATH=${PATH}:$HOME/scripts
+fi
+
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "trace" ]]; then
     # enable color support of ls and also add handy aliases
@@ -110,7 +115,7 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
-    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin:$HOME/scripts # Add RVM to PATH for scripting
+    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -124,6 +129,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
     fi
 
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
+    export HOMEBREW_GITHUB_API_TOKEN="6bee7984dfe807d8a310ef0c4b60d9f8ff98fd9d"
+
     # stupid OS X. the default version of screen that ships with OS X
     #   doesn't have 256-color support. workaround is to install it
     #   using homebrew
