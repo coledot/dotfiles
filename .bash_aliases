@@ -29,6 +29,13 @@ alias railc="rails c"
 # FIXME doesn't work if cwd isn't part of a git repo
 #alias stagedis="cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=`git rev-parse --abbrev-ref HEAD`"
 
+# clobbers access to /usr/bin/sum, but here's how many fucks i give about that: ()
+alias sum="awk '{ sum += $1; } END { print sum; }' \"$@\""
+
+if [[ -e `which task` ]]; then
+    alias sup="clear; task next"
+fi
+
 alias keyon="ssh-add -t 0"
 alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
