@@ -23,7 +23,7 @@ set t_Co=256
 set laststatus=2
 set clipboard=unnamed                                        " yank and paste with the system clipboard
 set directory-=.                                             " don't store swapfiles in the current directory
-set colorcolumn=100
+set colorcolumn=110
 
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
@@ -62,7 +62,7 @@ let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
 noremap <silent><Leader>/ :nohls<CR>
 " for command-t plugin - remap default file window dialog with split-window file dialog
-noremap <silent><Leader>t :CommandT<CR>
+noremap <silent><Leader>t :split<CR>:CommandT<CR>
 noremap <silent><Leader>a :Ack 
 noremap <silent><Leader>d :NERDTreeToggle
 noremap <silent><Leader>f :NERDTreeFind
@@ -87,7 +87,7 @@ if isdirectory(expand("$VIMRUNTIME/ftplugin"))
 endif
 
 au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
-au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=3
+au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
 au BufRead,BufNewFile *.rb,*.erb,*.rake match ExtraWhitespace /\s\+$\|\t/
 au BufRead,BufNewFile *.js,*.js.coffee  set et ts=2 sw=2
 au BufRead,BufNewFile *.md              set filetype=markdown
