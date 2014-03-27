@@ -3,3 +3,4 @@
 /.vim/doc/tags
 /.vim/swaps
 *.sw*
+.htoprc
