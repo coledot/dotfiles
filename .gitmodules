@@ -4,3 +4,39 @@
 [submodule ".vim/bundle/closetag.vim"]
 	path = .vim/bundle/closetag.vim
 	url = git@github.com:vim-scripts/closetag.vim.git
+[submodule ".vim/bundle/FuzzyFinder"]
+	path = .vim/bundle/FuzzyFinder
+	url = git@github.com:vim-scripts/FuzzyFinder.git
+[submodule ".vim/bundle/L9"]
+	path = .vim/bundle/L9
+	url = git@github.com:vim-scripts/L9.git
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
+	url = git@github.com:scrooloose/nerdtree.git
+[submodule ".vim/bundle/tabular"]
+	path = .vim/bundle/tabular
+	url = git@github.com:godlygeek/tabular.git
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule ".vim/bundle/Zenburn"]
+	path = .vim/bundle/Zenburn
+	url = git@github.com:jnurmine/Zenburn.git
+[submodule ".vim/bundle/puppet-syntax-vim"]
+	path = .vim/bundle/puppet-syntax-vim
+	url = git@github.com:puppetlabs/puppet-syntax-vim.git
+[submodule ".vim/bundle/vim-obsidian"]
+	path = .vim/bundle/vim-obsidian
+	url = git@github.com:tjohn/vim-obsidian.git
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = git@github.com:altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/ack.vim"]
+	path = .vim/bundle/ack.vim
+	url = git@github.com:mileszs/ack.vim.git
+[submodule ".vim/bundle/vim-fugitive"]
+	path = .vim/bundle/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule ".vim/bundle/vim-coffee-script"]
+	path = .vim/bundle/vim-coffee-script
+	url = git@github.com:kchmck/vim-coffee-script.git
