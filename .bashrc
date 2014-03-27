@@ -79,6 +79,18 @@ if [[ -d $HOME/scripts ]]; then
     export PATH=${PATH}:$HOME/scripts
 fi
 
+function start_ssh_agent {
+  SSHAGENT=/usr/bin/ssh-agent
+  SSHAGENTARGS="-s"
+  if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+    echo "Initialising new SSH agent..."
+    eval `$SSHAGENT $SSHAGENTARGS`
+    trap "kill $SSH_AGENT_PID" 0
+    echo succeeded
+    /usr/bin/ssh-add -t 0;
+  fi
+}
+
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "trace" ]]; then
     # enable color support of ls and also add handy aliases
@@ -152,12 +164,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 
     PGDATA=/usr/local/var/postgres
 
-    SSHAGENT=/usr/bin/ssh-agent
-    SSHAGENTARGS="-s"
-    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-        eval `$SSHAGENT $SSHAGENTARGS`
-        trap "kill $SSH_AGENT_PID" 0
-    fi
+    # FIXME get this to stop execing on login
+    start_ssh_agent
 
     alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
 
@@ -172,7 +180,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
         echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
         if [[ $? -ne 0 ]]; then
             host=$line
-            alias $host="screen -X title $host && ssh $host.inigral.com"
+            #alias $host="screen -X title $host && ssh $host.inigral.com"
+            alias $host="ssh $host.inigral.com"
         fi
     done < ~/.inigral_ssh_aliases
 
