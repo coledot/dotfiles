@@ -45,7 +45,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-_> <C-w>_
-"noremap <C-=> <C-w>=
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
