@@ -17,6 +17,7 @@ alias gmg="git merge"
 alias gll="git pull"
 alias gsh="git push"
 alias gbl="git blame"
+alias gtg="git tag"
 
 alias gash="git stash"
 alias gcod="git checkout -- ."

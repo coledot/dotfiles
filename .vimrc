@@ -44,7 +44,8 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-noremap <C-_> <C-w>_
+" FIXME conflicts w/ closetag.vim
+"noremap <C-_> <C-w>_
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
