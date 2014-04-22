@@ -138,12 +138,13 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     PGDATA=/usr/local/var/postgres
 
-    SSHAGENT=/usr/bin/ssh-agent
-    SSHAGENTARGS="-s"
-    if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-        eval `$SSHAGENT $SSHAGENTARGS`
-        trap "kill $SSH_AGENT_PID" 0
-    fi
+    # FIXME
+    #SSHAGENT=/usr/bin/ssh-agent
+    #SSHAGENTARGS="-s"
+    #if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
+    #    eval `$SSHAGENT $SSHAGENTARGS`
+    #    trap "kill $SSH_AGENT_PID" 0
+    #fi
 
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     export HOMEBREW_GITHUB_API_TOKEN="6bee7984dfe807d8a310ef0c4b60d9f8ff98fd9d"

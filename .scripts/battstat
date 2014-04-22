@@ -8,10 +8,16 @@ fi
 ioreg -l | grep Capacity 1>/dev/null 2>&1
 if [[ $? -ne 0 ]]; then
     # battery? what battery???
-    echo "N/A"
+    echo "bat:N/A%"
 else
+    plugged_in=`ioreg -l | grep 'ExternalConnected' | tr '\n' ' |' | awk '{print $NF}'`
+    if [[ "$plugged_in" == "Yes" ]]; then
+        pwr_src='chg'
+    else
+        pwr_src='bat'
+    fi
     # print remaining battery life as a %
     pct=`ioreg -l | grep '\(Max\|Current\)Capacity' | tr '\n' ' |' | awk '{printf("%.1f\n", ($10 / $5) * 100)}'`
-    echo $pct
+    echo "$pwr_src:$pct%"
 fi
 
