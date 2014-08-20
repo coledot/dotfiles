@@ -17,15 +17,6 @@ if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    source /usr/local/etc/bash_completion.d/git-prompt.sh
-    # FIXME bg color is hosed after using vim
-    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
-else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
-fi
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
@@ -60,14 +51,28 @@ fi
 if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+# more fun stuff re: completion
+if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    # FIXME bg color is hosed after using vim
+    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
+else
+    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+fi
+if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    __git_complete gco _git_checkout
+    __git_complete gdf _git_diff
+    __git_complete gll _git_pull
+    __git_complete gsh _git_push
+fi
 
 if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
 fi
 
 # If not running interactively, don't do anything
-tty -s
-if [[ $? -eq 0 ]]; then
+tty -s; if [[ $? -eq 0 ]]; then
   # disable xon/off (annoying)
   stty stop undef
   stty start undef
@@ -90,6 +95,18 @@ function start_ssh_agent {
     /usr/bin/ssh-add -t 0;
   fi
 }
+
+function make_ssh_aliases {
+  while read line; do
+      echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
+      if [[ $? -ne 0 ]]; then
+          host=$line
+          #alias $host="screen -X title $host && ssh $host.inigral.com"
+          alias $host="ssh $host.inigral.com"
+      fi
+  done < ~/.inigral_ssh_aliases
+}
+
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "trace" ]]; then
@@ -138,6 +155,8 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     PGDATA=/usr/local/var/postgres
 
+    make_ssh_aliases
+
     # FIXME
     #SSHAGENT=/usr/bin/ssh-agent
     #SSHAGENTARGS="-s"
@@ -173,6 +192,8 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     # FIXME get this to stop execing on login
     start_ssh_agent
 
+    make_ssh_aliases
+
     alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
 
     alias pspec='rake parallel:spec; cat log/parallel_summary.log'
@@ -182,15 +203,6 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
     #alias scapp_restart='scapp_off && scapp_on'
 
-    while read line; do
-        echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
-        if [[ $? -ne 0 ]]; then
-            host=$line
-            #alias $host="screen -X title $host && ssh $host.inigral.com"
-            alias $host="ssh $host.inigral.com"
-        fi
-    done < ~/.inigral_ssh_aliases
-
     export RUBY_HEAP_MIN_SLOTS=1000000
     export RUBY_HEAP_SLOTS_INCREMENT=1000000
     export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -198,4 +210,9 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     export RUBY_HEAP_FREE_MIN=500000
 fi
 
+# to make a ramdisk: diskutil erasevolume HFS+ 'ramdisk' `hdiutil attach -nomount ram://8388608`
+
 # vim: et ts=4 sw=4
+
+PERL_MB_OPT="--install_base \"/Users/cole/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/cole/perl5"; export PERL_MM_OPT;

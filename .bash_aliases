@@ -1,7 +1,9 @@
-# TODO alias ls to, ~50% of the time, instead print "stop relying on ls so damn much" to stderr & return 1
 alias ll="ls -l"
 alias la="ls -la"
 alias ltr="ls -ltr"
+
+alias fdf="find . -type f"
+alias fdd="find . -type d"
 
 alias gcl="git clone"
 alias gco="git checkout"
@@ -18,17 +20,27 @@ alias gll="git pull"
 alias gsh="git push"
 alias gbl="git blame"
 alias gtg="git tag"
+alias gmv="git mv"
+alias gbs="git bisect"
+alias gbr="git branch"
 
 alias gash="git stash"
+alias gcmm="git commit"
 alias gcod="git checkout -- ."
+alias gshv="git shove"
 
 alias gadcm="git add . && git commit -m"
 
 alias railc="rails c"
 
+alias pspec='rake parallel:spec; cat log/parallel_summary.log'
+alias fpspec='rake parallel:setup; pspec'
+
 # deploy the current branch to staging
-# FIXME doesn't work if cwd isn't part of a git repo
-#alias stagedis="cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=`git rev-parse --abbrev-ref HEAD`"
+alias stagedis="cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=\`git rev-parse --abbrev-ref HEAD\`"
+
+alias psgsrt='passenger start'
+alias psgstp='passenger stop'
 
 # clobbers access to /usr/bin/sum, but here's how many fucks i give about that: ()
 alias sum="awk '{ sum += $1; } END { print sum; }' \"$@\""

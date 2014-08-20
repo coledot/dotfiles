@@ -60,11 +60,14 @@ let g:miniBufExplMaxSize = 3 " no. lines to use
 "let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
 let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
+let g:ctrlp_custom_ignore = '\v[\/]tmp$'
+
 noremap <silent><Leader>/ :nohls<CR>
 noremap <silent><Leader>t :split<CR>:CtrlP .<CR>
-noremap <silent><Leader>a :Ack 
 noremap <silent><Leader>d :NERDTreeToggle
 noremap <silent><Leader>f :NERDTreeFind
+" NOTE trailing whitespace intended
+noremap <Leader>a :Ack 
 
 filetype off
 call pathogen#infect()
