@@ -70,6 +70,9 @@ fi
 if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
 fi
+if [ -f $HOME/.commacd.bash ]; then
+    . $HOME/.commacd.bash
+fi
 
 # If not running interactively, don't do anything
 tty -s; if [[ $? -eq 0 ]]; then
@@ -109,28 +112,7 @@ function make_ssh_aliases {
 
 
 # host-specific shenanigans. try to keep this to a minimum
-if [[ "$HOSTNAME" == "trace" ]]; then
-    # enable color support of ls and also add handy aliases
-    if [ "$TERM" != "dumb" ]; then
-        eval "`dircolors -b`"
-        alias ls='ls --color=auto'
-    fi
-
-    export PATH="${PATH}:/home/cole/local/bin:/home/cole/local/gcc-4.2.4-glibc-2.3.6/i686-unknown-linux-gnu/bin"
-    export DSSI_PATH="/home/cole/.dssi:/usr/local/lib/dssi:/usr/lib/dssi:/home/cole/local/lib/dssi"
-
-    export GOROOT="/home/cole/go"
-    export GOARCH=amd64
-    export GOOS=linux
-    export GOBIN="/home/cole/local/bin"
-
-    export LD_LIBRARY_PATH="/usr/local/lib"
-elif [[ "$HOSTNAME" == "detune" ]]; then
-    # stupid OS X. the default version of screen that ships with OS X
-    #   doesn't have 256-color support. workaround is to install it
-    #   using homebrew
-    alias screen='/usr/local/bin/screen'
-
+if [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
     # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
     alias cdtssh="sudo ssh -i ~/.ssh/id_rsa \
@@ -149,7 +131,7 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
-    PATH=$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH:$GOROOT/bin:${GOPATH//://bin:}/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
     PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
     LIBRARY_PATH=/usr/local/lib
 
@@ -168,10 +150,6 @@ elif [[ "$HOSTNAME" == "detune" ]]; then
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
     export HOMEBREW_GITHUB_API_TOKEN="6bee7984dfe807d8a310ef0c4b60d9f8ff98fd9d"
 
-    # stupid OS X. the default version of screen that ships with OS X
-    #   doesn't have 256-color support. workaround is to install it
-    #   using homebrew
-    alias screen='/usr/local/bin/screen'
     # access cdtvgr from the vpn (to access the app, nav directly to
     # https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new \
@@ -198,10 +176,6 @@ elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
 
     alias pspec='rake parallel:spec; cat log/parallel_summary.log'
     alias fpspec='rake parallel:setup; rake parallel:spec; cat log/parallel_summary.log'
-
-    #alias scapp_off='sudo stop  schools_workers && sudo service nginx stop  && sudo stop  schools_notifications'
-    #alias scapp_on='sudo start schools_workers && sudo service nginx start && sudo start schools_notifications'
-    #alias scapp_restart='scapp_off && scapp_on'
 
     export RUBY_HEAP_MIN_SLOTS=1000000
     export RUBY_HEAP_SLOTS_INCREMENT=1000000

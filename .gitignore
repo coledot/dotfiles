@@ -4,3 +4,5 @@
 /.vim/swaps
 *.sw*
 .htoprc
+fish_history
+fishd.*
