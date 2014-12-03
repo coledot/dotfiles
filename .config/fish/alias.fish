@@ -4,6 +4,8 @@ alias ll="ls -l"
 alias la="ls -la"
 alias ltr="ls -ltr"
 
+alias psx="ps axuww"
+
 alias fdf="find . -type f"
 alias fdd="find . -type d"
 
@@ -53,3 +55,10 @@ alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
 
 alias vgr="vagrant"
+
+while read line;
+  if echo $line | egrep '^[ \t]*$|^[ \t]*#' >/dev/null;
+    continue 
+  end
+  alias $line="ssh $line.inigral.com"
+end < ~/.inigral_ssh_aliases

@@ -3,3 +3,5 @@ library: ~/.beets_data/music_library.blb
 
 import:
     copy: no
+
+plugins: convert

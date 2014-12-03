@@ -1,30 +1,12 @@
+source ~/.config/fish/git.fish
+source ~/.config/fish/alias.fish
+source ~/.config/fish/functions/rvm.fish
+
 set fish_greeting ""
-
-# git shit
-set -g __fish_git_prompt_show_informative_status 1
-set -g __fish_git_prompt_hide_untrackedfiles 1
-
-set -g __fish_git_prompt_color_branch white bold
-set -g __fish_git_prompt_showupstream "informative"
-set -g __fish_git_prompt_char_upstream_ahead "↑"
-set -g __fish_git_prompt_char_upstream_behind "↓"
-set -g __fish_git_prompt_char_upstream_prefix ""
-
-set -g __fish_git_prompt_char_stagedstate "●"
-set -g __fish_git_prompt_char_dirtystate "✚"
-set -g __fish_git_prompt_char_untrackedfiles "…"
-set -g __fish_git_prompt_char_conflictedstate "✖"
-set -g __fish_git_prompt_char_cleanstate "✔"
-
-set -g __fish_git_prompt_color_dirtystate cyan
-set -g __fish_git_prompt_color_stagedstate yellow
-set -g __fish_git_prompt_color_invalidstate red
-set -g __fish_git_prompt_color_untrackedfiles $fish_color_normal
-set -g __fish_git_prompt_color_cleanstate green bold
 
 function fish_prompt
   set_color cyan
-  echo -n (pwd)
+  echo -n (prompt_pwd)
   set_color normal
   echo (__fish_git_prompt)
   set_color green
@@ -40,9 +22,12 @@ function fish_prompt
   echo -n " $sigil "
 end
 
-source ~/.config/fish/alias.fish
-source ~/.config/fish/functions/rvm.fish
+set -x EDITOR /usr/bin/vim
+set -x TERM   xterm-256color
 
+# fixme git alias auto-completion is hosed
+
+# host-specific
 if test (hostname) = "detune";
   set -x GOROOT          /usr/local/go
   set -x GOPATH          $HOME/.go:$HOME/.go
@@ -52,3 +37,4 @@ if test (hostname) = "detune";
   set -x PGDATA          /usr/local/var/postgres
 end
 
+eval (direnv hook fish)

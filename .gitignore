@@ -1,8 +1,14 @@
+/.config/ThingM
+/.config/configstore
+/.config/filezilla
+/.config/gtk-2.0
+/.config/UDP\ Software
 /.vim/backup
 /.vim/.netrwhist
 /.vim/doc/tags
 /.vim/swaps
 *.sw*
 .htoprc
+.DS_Store
 fish_history
 fishd.*
