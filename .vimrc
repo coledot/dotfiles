@@ -21,9 +21,6 @@ set tabstop=4
 set shiftwidth=4
 set t_Co=256
 set laststatus=2
-if $TMUX == ''
-  set clipboard=unnamed                                        " yank and paste with the system clipboard
-end
 set directory-=.                                             " don't store swapfiles in the current directory
 set colorcolumn=110
 set shell=/bin/bash
@@ -31,6 +28,9 @@ set shell=/bin/bash
 if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
   set fileencodings=utf-8,latin1
 endif
+if $TMUX == ''
+  set clipboard=unnamed                                        " yank and paste with the system clipboard
+end
 set tenc=utf-8
 set enc=utf-8
 
@@ -66,11 +66,12 @@ let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 let g:ctrlp_custom_ignore = '\v[\/]tmp$'
 
 noremap <silent><Leader>/ :nohls<CR>
-noremap <silent><Leader>t :split<CR>:CtrlP .<CR>
+noremap <silent><Leader>o :split<CR>:CtrlP .<CR>
 noremap <silent><Leader>d :NERDTreeToggle
 noremap <silent><Leader>f :NERDTreeFind
 " NOTE trailing whitespace intended
 noremap <Leader>a :Ack 
+noremap <Leader>t :Tabularize 
 
 filetype off
 call pathogen#infect()

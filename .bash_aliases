@@ -28,6 +28,7 @@ alias gash="git stash"
 alias gcmm="git commit"
 alias gcod="git checkout -- ."
 alias gshv="git shove"
+alias gpan="git panic"
 
 alias gadcm="git add . && git commit -m"
 

@@ -42,6 +42,7 @@
     graphviz = "!f() { echo 'digraph git {' ; git log --pretty='format:  %h -> { %p }' \"$@\" | sed 's/[0-9a-f][0-9a-f]*/\"&\"/g' ; echo '}'; }; f"
     pullall = !git pull && git submodule update
     shove = push --set-upstream origin HEAD
+    panic = !bash ~/scripts/prompt git PANIC && git reset -- . && git checkout -- .
 
 [diff]
     tool = vim-wrapper-script

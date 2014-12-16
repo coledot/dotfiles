@@ -1,0 +1,12 @@
+#!/bin/bash
+while true; do
+  prompt="Are you sure?"
+  if [[ ! -z $* ]]; then
+    prompt="$*--are you sure?"
+  fi
+  read -p "$prompt " yn
+  case $yn in
+    [Yy]* ) exit 0;;
+    * ) exit 1;;
+  esac
+done
