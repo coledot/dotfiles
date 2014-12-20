@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FIELDS="\$$1"
+for var in ${*:2}; do
+    FIELDS="$FIELDS, \$$var"
+done
+
+while read s; do
+    echo $s | /usr/local/bin/awk "{print $FIELDS}"
+done

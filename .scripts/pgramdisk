@@ -1,0 +1,21 @@
+#!/bin/bash
+
+PGDIR=/usr/local/var/pgramdisk
+LOGFILE=/usr/local/var/pgramdisk_server.log
+
+RAMDISK_MOUNT_DIR=/Volumes/pgramdisk
+RAMDISK_USER_DIR=$RAMDISK_MOUNT_DIR/$USER
+
+DISK=`/usr/bin/hdiutil attach -nobrowse -nomount ram://4194304`
+/usr/sbin/diskutil erasevolume HFS+ "pgramdisk" $DISK
+/usr/bin/chflags hidden $RAMDISK_MOUNT_DIR
+/bin/mkdir -pv $RAMDISK_USER_DIR
+
+/bin/rm -rvf $PGDIR
+/bin/ln -v -s $RAMDISK_USER_DIR $PGDIR
+/usr/local/bin/initdb $PGDIR -E utf8 -U postgres
+
+# fixme sometimes fails w/o fdbk
+/usr/bin/sed -i.bak 's/#port = 5432/port = 54321/' $PGDIR/postgresql.conf
+
+/usr/local/bin/postgres -D $PGDIR -r $LOGFILE
