@@ -1,8 +1,9 @@
 /.config/ThingM
+/.config/UDP\ Software
+/.config/beets/state.pickle
 /.config/configstore
 /.config/filezilla
 /.config/gtk-2.0
-/.config/UDP\ Software
 /.vim/backup
 /.vim/.netrwhist
 /.vim/doc/tags
