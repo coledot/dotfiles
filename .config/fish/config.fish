@@ -31,7 +31,7 @@ set -x TERM   xterm-256color
 if test (hostname) = "detune";
   set -x GOROOT          /usr/local/go
   set -x GOPATH          $HOME/.go:$HOME/.go
-  set -x PATH            /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin
+  set -x PATH            /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin $HOME/.local/bin
   set -x PKG_CONFIG_PATH /usr/local/lib/pkgconfig
   set -x LIBRARY_PATH    /usr/local/lib
   set -x PGDATA          /usr/local/var/postgres

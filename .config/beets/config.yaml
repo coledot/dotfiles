@@ -7,6 +7,6 @@ import:
 plugins: convert
 
 convert:
-    command: ffmpeg -i $source -y -vn -aq 2 -b:v 320k $dest
+    command: ffmpeg -i $source -y -vn -aq 0 $dest
     extension: mp3
 

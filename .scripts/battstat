@@ -18,7 +18,10 @@ else
         pwr_src='bat'
     fi
     # print remaining battery life as a %
-    pct=`ioreg -c AppleSmartBattery | grep '\(Max\|Current\)Capacity' | tr '\n' ' |' | awk '{printf("%.1f\n", ($10 / $5) * 100)}'`
+    #pct=`ioreg -c AppleSmartBattery | grep '\(Max\|Current\)Capacity' | tr '\n' ' |' | awk '{printf("%.1f\n", ($10 / $5) * 100)}'`
+    numer=`echo $batt_stat | sed 's,.*"CurrentCapacity" = \([0-9]*\).*,\1,g'`
+    denom=`echo $batt_stat | sed 's,.*"MaxCapacity" = \([0-9]*\).*,\1,g'`
+    pct=`echo $numer $denom | awk '{printf("%.1f\n", ($1 / $2) * 100)}'`
     echo "$pwr_src:$pct%"
 fi
 
