@@ -1,6 +1,10 @@
+set fish_path $HOME/.oh-my-fish
+#set fish_theme robbyrussell
+set fish_plugins rvm
+. $fish_path/oh-my-fish.fish
+# overrides/more config
 source ~/.config/fish/git.fish
 source ~/.config/fish/alias.fish
-source ~/.config/fish/functions/rvm.fish
 
 set fish_greeting ""
 
