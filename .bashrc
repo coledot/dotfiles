@@ -48,7 +48,7 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 # add'l completion provided by brew
-if [[ ! -z `which brew` && -f $(brew --prefix)/etc/bash_completion ]]; then
+if [[ ! -z /usr/local/bin/brew && -f $(brew --prefix)/etc/bash_completion ]]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 # more fun stuff re: completion

@@ -1,26 +1,26 @@
 #! /bin/bash
 
-if [[ ! -e `which ioreg` ]]; then
+if [[ ! -e /usr/sbin/ioreg ]]; then
     echo "You're not running OSX." 2>&1
     exit 1
 fi
 
 batt_stat=`ioreg -c AppleSmartBattery`
-echo $batt_stat | grep -q Capacity
-if [[ $? -ne 0 ]]; then
+if [[ $batt_stat != *"Capacity"* ]]; then
     # battery? what battery???
     echo "bat:N/A%"
 else
-    echo $batt_stat | grep -q 'ExternalConnected.*Yes'
-    if [[ $? -eq 0 ]]; then
+    if [[ $batt_stat == *'"ExternalConnected" = Yes'* ]]; then
         pwr_src='chg'
     else
         pwr_src='bat'
     fi
     # print remaining battery life as a %
-    #pct=`ioreg -c AppleSmartBattery | grep '\(Max\|Current\)Capacity' | tr '\n' ' |' | awk '{printf("%.1f\n", ($10 / $5) * 100)}'`
-    numer=`echo $batt_stat | sed 's,.*"CurrentCapacity" = \([0-9]*\).*,\1,g'`
-    denom=`echo $batt_stat | sed 's,.*"MaxCapacity" = \([0-9]*\).*,\1,g'`
+    numer_re='"CurrentCapacity" = ([0-9]*)'
+    denom_re='"MaxCapacity" = ([0-9]*)'
+    [[ $batt_stat =~ ${denom_re}.*$numer_re ]]
+    denom=${BASH_REMATCH[1]}
+    numer=${BASH_REMATCH[2]}
     pct=`echo $numer $denom | awk '{printf("%.1f\n", ($1 / $2) * 100)}'`
     echo "$pwr_src:$pct%"
 fi

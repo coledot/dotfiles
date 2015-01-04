@@ -46,7 +46,7 @@ alias psgstp='passenger stop'
 # clobbers access to /usr/bin/sum, but here's how many fucks i give about that: ()
 alias sum="awk '{ sum += $1; } END { print sum; }' \"$@\""
 
-if [[ -e `which task` ]]; then
+if [[ -e /usr/local/bin/task ]]; then
     alias sup="clear; task next"
 fi
 

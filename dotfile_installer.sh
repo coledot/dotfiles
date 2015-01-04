@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 cd $HOME
 filelist=`find .dotfiles -mindepth 1 -maxdepth 1 -not -name .git`
