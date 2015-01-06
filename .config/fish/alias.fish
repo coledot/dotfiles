@@ -1,4 +1,4 @@
-function cdtssh; sudo ssh -i ~/.ssh/id_rsa -Y cole@cole_inigral; end
+function cdtssh; ssh -Y cole_inigral; end
 
 function ll; ls -l; end
 function la; ls -la; end
@@ -32,6 +32,7 @@ function gash; git stash $argv; end
 function gcmm; git commit; end
 function gcod; git checkout -- .; end
 function gshv; git shove; end
+function gpan; git panic; end
 
 function gadcm; git add .; and git commit -m $argv; end
 

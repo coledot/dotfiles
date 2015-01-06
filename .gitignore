@@ -1,13 +1,13 @@
-/.config/ThingM
-/.config/UDP\ Software
-/.config/beets/state.pickle
-/.config/configstore
-/.config/filezilla
-/.config/gtk-2.0
-/.vim/backup
-/.vim/.netrwhist
-/.vim/doc/tags
-/.vim/swaps
+.config/ThingM
+.config/UDP\ Software
+.config/beets/state.pickle
+.config/configstore
+.config/filezilla
+.config/gtk-2.0
+.vim/backup
+.vim/.netrwhist
+.vim/doc/tags
+.vim/swaps
 *.sw*
 .htoprc
 .DS_Store

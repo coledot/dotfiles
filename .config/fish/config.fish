@@ -10,21 +10,21 @@ source ~/.config/fish/functions/rvm.fish
 set fish_greeting ""
 
 function fish_prompt
-  set_color cyan
-  echo -n (prompt_pwd)
-  set_color normal
-  echo (__fish_git_prompt)
-  set_color green
-  echo -n (whoami)
-  set_color white
-  echo -n "@"(hostname)
-  if test (id -u) = 0;
+  set host (hostname)
+  set git_info (__fish_git_prompt)
+  set uid (id -u)
+  set sigil "\$"
+  if test $uid = 0;
     set sigil "#"
-  else
-    set sigil "\$"
   end
+  set_color cyan
+  echo -n $PWD
   set_color normal
-  echo -n " $sigil "
+  echo $git_info
+  set_color green
+  echo -n $USER
+  set_color normal
+  echo -n "@$host $sigil "
 end
 
 set -x EDITOR /usr/bin/vim
