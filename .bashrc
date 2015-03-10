@@ -148,8 +148,6 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     #fi
 
 elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
-    export HOMEBREW_GITHUB_API_TOKEN="6bee7984dfe807d8a310ef0c4b60d9f8ff98fd9d"
-
     # access cdtvgr from the vpn (to access the app, nav directly to
     # https://cdtvgr.canvas.schoolsapp.com/ on detune)
     alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new \
