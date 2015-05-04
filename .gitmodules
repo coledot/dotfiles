@@ -1,15 +1,6 @@
 [submodule ".vim/bundle/ctrlp.vim"]
 	path = .vim/bundle/ctrlp.vim
 	url = git@github.com:kien/ctrlp.vim.git
-[submodule ".vim/bundle/closetag.vim"]
-	path = .vim/bundle/closetag.vim
-	url = git@github.com:vim-scripts/closetag.vim.git
-[submodule ".vim/bundle/FuzzyFinder"]
-	path = .vim/bundle/FuzzyFinder
-	url = git@github.com:vim-scripts/FuzzyFinder.git
-[submodule ".vim/bundle/L9"]
-	path = .vim/bundle/L9
-	url = git@github.com:vim-scripts/L9.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = git@github.com:scrooloose/nerdtree.git
@@ -46,3 +37,6 @@
 [submodule ".vim/bundle/vim-emblem"]
 	path = .vim/bundle/vim-emblem
 	url = git@github.com:darthdeus/vim-emblem.git
+[submodule ".vim/bundle/vim-gitgutter"]
+	path = .vim/bundle/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git

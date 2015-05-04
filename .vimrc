@@ -67,8 +67,8 @@ let g:ctrlp_custom_ignore = '\v[\/]tmp$'
 
 noremap <silent><Leader>/ :nohls<CR>
 noremap <silent><Leader>o :split<CR>:CtrlP .<CR>
-noremap <silent><Leader>d :NERDTreeToggle
-noremap <silent><Leader>f :NERDTreeFind
+noremap <silent><Leader>d :NERDTreeToggle<CR>
+noremap <silent><Leader>f :NERDTreeFind<CR>
 " NOTE trailing whitespace intended
 noremap <Leader>a :Ack 
 noremap <Leader>t :Tabularize 
@@ -101,6 +101,15 @@ au BufRead,BufNewFile *.md              set filetype=markdown
 au BufRead,BufNewFile *.pp              set et ts=2 sw=2
 " one of vim, cron, or OSX isn't so bright... take your pick.
 au BufEnter /private/tmp/crontab.*      setl backupcopy=yes
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 if !has("gui_running")
   colorscheme zenburn

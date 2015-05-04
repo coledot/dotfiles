@@ -1,3 +1,5 @@
+function vimalias; vim ~/.config/fish/alias.fish; end
+
 function cdtssh; ssh -Y cole_inigral; end
 
 function ll; ls -l; end
@@ -5,6 +7,7 @@ function la; ls -la; end
 function ltr; ls -ltr; end
 
 function psx; ps axuww; end
+function psxck; psx | ack $argv; end
 
 function fdf; find . -type f; end
 function fdd; find . -type d; end
@@ -42,7 +45,7 @@ function pspec; rake parallel:spec; cat log/parallel_summary.log; end
 function fpspec; rake parallel:setup; pspec; end
 
 # deploy the current branch to staging
-function stagedis; cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=(git rev-parse --abbrev-ref HEAD); end
+function stagedis; bundle exec cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=(git rev-parse --abbrev-ref HEAD); end
 
 function psgsrt; passenger start; end
 function psgstp; passenger stop; end
