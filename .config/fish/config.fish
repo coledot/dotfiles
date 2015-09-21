@@ -35,12 +35,14 @@ set -x TERM   screen-256color
 
 # host-specific
 if test (hostname) = "detune";
-  set -x GOROOT          /usr/local/go
-  set -x GOPATH          $HOME/.go:$HOME/.go
-  set -x PATH            /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin $HOME/.local/bin
-  set -x PKG_CONFIG_PATH /usr/local/lib/pkgconfig
-  set -x LIBRARY_PATH    /usr/local/lib
-  set -x PGDATA          /usr/local/var/postgres
+  set -x GOROOT            /usr/local/go
+  set -x GOPATH            $HOME/.go:$HOME/.go
+  set -x PATH              /Users/cole/torch/install/bin /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin $HOME/.local/bin
+  set -x PKG_CONFIG_PATH   /usr/local/lib/pkgconfig
+  set -x LIBRARY_PATH      /usr/local/lib
+  set -x PGDATA            /usr/local/var/postgres
+  set -x LD_LIBRARY_PATH   /Users/cole/torch/install/lib $LD_LIBRARY_PATH
+  set -x DYLD_LIBRARY_PATH /Users/cole/torch/install/lib $DYLD_LIBRARY_PATH
 
   eval (direnv hook fish)
 end

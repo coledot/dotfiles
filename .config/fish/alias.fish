@@ -1,6 +1,6 @@
 function vimalias; vim ~/.config/fish/alias.fish; end
 
-function cdtssh; ssh -Y cole_inigral; end
+#function cdtssh; ssh -Y cole_inigral; end
 
 function ll; ls -l; end
 function la; ls -la; end
@@ -44,14 +44,13 @@ function rlsc; rails c $argv; end
 function pspec; rake parallel:spec; cat log/parallel_summary.log; end
 function fpspec; rake parallel:setup; pspec; end
 
-# deploy the current branch to staging
-function stagedis; bundle exec cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=(git rev-parse --abbrev-ref HEAD); end
-
 function psgsrt; passenger start; end
 function psgstp; passenger stop; end
 
 if test -e (which task);
   function sup; clear; task next; end
+  function werk; clear; task proj:werk $argv; end
+  function pers; clear; task proj:pers $argv; end
 end
 
 function keyon; ssh-add -t 0; end
@@ -59,10 +58,15 @@ function keyoff; ssh-add -D; end
 function keyls; ssh-add -l; end
 
 function vgr; vagrant $argv; end
+function punch; ttrack $argv; end
 
-while read line;
-  if echo $line | egrep '^[ \t]*$|^[ \t]*#' >/dev/null;
-    continue 
-  end
-  function $line; ssh {$_}.inigral.com; end
-end < ~/.inigral_ssh_aliases
+#while read line;
+#  if echo $line | egrep '^[ \t]*$|^[ \t]*#' >/dev/null;
+#    continue 
+#  end
+#  function $line; ssh {$_}.inigral.com; end
+#end < ~/.inigral_ssh_aliases
+
+# deploy the current branch to staging
+#function stagedis; bundle exec cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=(git rev-parse --abbrev-ref HEAD); end
+

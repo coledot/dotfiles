@@ -1,4 +1,10 @@
 travel_delay = -1
 explore_delay = -1
+rest_delay = -1
 hp_warning = 50
 hp_colour = 75:yellow, 50:red
+default_manual_training = true
+auto_eat_chunks = true
+show_more = false
+small_more = true
+

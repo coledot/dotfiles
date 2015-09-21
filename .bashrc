@@ -99,35 +99,35 @@ function start_ssh_agent {
   fi
 }
 
-function make_ssh_aliases {
-  while read line; do
-      echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
-      if [[ $? -ne 0 ]]; then
-          host=$line
-          #alias $host="screen -X title $host && ssh $host.inigral.com"
-          alias $host="ssh $host.inigral.com"
-      fi
-  done < ~/.inigral_ssh_aliases
-}
+#function make_ssh_aliases {
+#  while read line; do
+#      echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
+#      if [[ $? -ne 0 ]]; then
+#          host=$line
+#          #alias $host="screen -X title $host && ssh $host.inigral.com"
+#          alias $host="ssh $host.inigral.com"
+#      fi
+#  done < ~/.inigral_ssh_aliases
+#}
 
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
-    # login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
-    alias cdtssh="sudo ssh -i ~/.ssh/id_rsa \
-                  -Y cole@cole_inigral"
-    alias cdttun="sudo ssh -i ~/.ssh/id_rsa \
-                  -L localhost:443:localhost:443 \
-                  -L localhost:5555:localhost:5555 \
-                  -Y cole@cole_inigral"
-    alias telecdttun="sudo ssh -i ~/.ssh/id_rsa \
-                  -L localhost:443:localhost:443 \
-                  -L localhost:5555:localhost:5555 \
-                  -Y -p 5055 cole@localhost"
-    alias teleclientcdt="tele -client -in=localhost:5055 -out=cole_inigral:5055"
-    alias telesshdelay="sudo ssh -i ~/.ssh/id_rsa -Y -p 5056 cole@localhost"
-    alias teleclientdelay="tele -client -in=localhost:5056 -out=delay:5055"
+    ## login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
+    #alias cdtssh="sudo ssh -i ~/.ssh/id_rsa \
+    #              -Y cole@cole_inigral"
+    #alias cdttun="sudo ssh -i ~/.ssh/id_rsa \
+    #              -L localhost:443:localhost:443 \
+    #              -L localhost:5555:localhost:5555 \
+    #              -Y cole@cole_inigral"
+    #alias telecdttun="sudo ssh -i ~/.ssh/id_rsa \
+    #              -L localhost:443:localhost:443 \
+    #              -L localhost:5555:localhost:5555 \
+    #              -Y -p 5055 cole@localhost"
+    #alias teleclientcdt="tele -client -in=localhost:5055 -out=cole_inigral:5055"
+    #alias telesshdelay="sudo ssh -i ~/.ssh/id_rsa -Y -p 5056 cole@localhost"
+    #alias teleclientdelay="tele -client -in=localhost:5056 -out=delay:5055"
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
@@ -137,7 +137,7 @@ if [[ "$HOSTNAME" == "detune" ]]; then
 
     PGDATA=/usr/local/var/postgres
 
-    make_ssh_aliases
+    #make_ssh_aliases
 
     # FIXME
     #SSHAGENT=/usr/bin/ssh-agent
@@ -146,40 +146,6 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     #    eval `$SSHAGENT $SSHAGENTARGS`
     #    trap "kill $SSH_AGENT_PID" 0
     #fi
-
-elif [[ "$HOSTNAME" == "cole_inigral" ]]; then
-    # access cdtvgr from the vpn (to access the app, nav directly to
-    # https://cdtvgr.canvas.schoolsapp.com/ on detune)
-    alias vgrtun="sudo ssh -i ~/.ssh/deploy_rsa_new \
-                  -L 10.42.0.143:443:192.168.33.10:443 \
-                  -L 10.42.0.143:5555:192.168.33.10:5555 \
-                  vagrant@192.168.33.10"
-
-    alias teleserverssh="tele -server -in=localhost:22 -out=10.42.0.143:5055"
-
-    GOROOT=/usr/local/go
-    export GOPATH=$HOME/.go:
-    PATH=/usr/local/bin:/usr/local/sbin:$PATH:${GOPATH//://bin:}/bin:$HOME/local/bin:$HOME/.rvm/bin:/usr/local/share/npm/bin
-    PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-    LIBRARY_PATH=/usr/local/lib
-
-    PGDATA=/usr/local/var/postgres
-
-    # FIXME get this to stop execing on login
-    start_ssh_agent
-
-    make_ssh_aliases
-
-    alias pg_restart="pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log restart"
-
-    alias pspec='rake parallel:spec; cat log/parallel_summary.log'
-    alias fpspec='rake parallel:setup; rake parallel:spec; cat log/parallel_summary.log'
-
-    export RUBY_HEAP_MIN_SLOTS=1000000
-    export RUBY_HEAP_SLOTS_INCREMENT=1000000
-    export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-    export RUBY_GC_MALLOC_LIMIT=100000000
-    export RUBY_HEAP_FREE_MIN=500000
 fi
 
 # to make a ramdisk: diskutil erasevolume HFS+ 'ramdisk' `hdiutil attach -nomount ram://8388608`
