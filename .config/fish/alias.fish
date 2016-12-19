@@ -60,13 +60,3 @@ function keyls; ssh-add -l; end
 function vgr; vagrant $argv; end
 function punch; ttrack $argv; end
 
-#while read line;
-#  if echo $line | egrep '^[ \t]*$|^[ \t]*#' >/dev/null;
-#    continue 
-#  end
-#  function $line; ssh {$_}.inigral.com; end
-#end < ~/.inigral_ssh_aliases
-
-# deploy the current branch to staging
-#function stagedis; bundle exec cap staging deploy HOSTS=dev5.schoolsapp.com BRANCH=(git rev-parse --abbrev-ref HEAD); end
-
