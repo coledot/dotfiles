@@ -48,8 +48,10 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 # add'l completion provided by brew
-if [[ ! -z /usr/local/bin/brew && -f $(brew --prefix)/etc/bash_completion ]]; then
-    . $(brew --prefix)/etc/bash_completion
+if [[ ! -z /usr/local/bin/brew ]]; then
+    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 fi
 # more fun stuff re: completion
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
