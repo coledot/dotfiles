@@ -9,3 +9,5 @@ fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export HOMEBREW_NO_ANALYTICS=1
+
+export PATH="$HOME/.cargo/bin:$PATH"

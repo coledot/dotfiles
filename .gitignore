@@ -1,15 +1,16 @@
+.DS_Store
 .config/ThingM
 .config/UDP\ Software
 .config/beets/state.pickle
 .config/configstore
 .config/filezilla
 .config/gtk-2.0
-.vim/backup
+.config/karabiner
+.htoprc
 .vim/.netrwhist
+.vim/backup
 .vim/doc/tags
 .vim/swaps
-*.sw*
-.htoprc
-.DS_Store
 fish_history
 fishd.*
+*.sw*
