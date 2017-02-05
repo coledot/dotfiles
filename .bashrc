@@ -1,9 +1,8 @@
 #! /bin/bash
 
-shopt -s checkwinsize
-
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
+shopt -s histappend
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
