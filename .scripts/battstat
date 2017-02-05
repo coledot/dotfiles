@@ -5,7 +5,7 @@ if [[ ! -e /usr/sbin/ioreg ]]; then
     exit 1
 fi
 
-batt_stat=`ioreg -c AppleSmartBattery`
+batt_stat=`/usr/sbin/ioreg -c AppleSmartBattery`
 if [[ $batt_stat != *"Capacity"* ]]; then
     # battery? what battery???
     echo "bat:N/A%"
