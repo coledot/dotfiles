@@ -14,9 +14,11 @@ cd into dir
 
 grab submodules incl. vim plugins & tmux plugins
 
+`git submodule init`
+
 `git submodule update`
 
-run installer
+run installer, this creates symlinks from locations in ~/ to all files defined in ~/.dotfiles:
 
 `./dotfile_installer.sh`
 
