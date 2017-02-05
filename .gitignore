@@ -1,11 +1,5 @@
 .DS_Store
-.config/ThingM
-.config/UDP\ Software
-.config/beets/state.pickle
-.config/configstore
-.config/filezilla
-.config/gtk-2.0
-.config/karabiner
+.config/*
 .htoprc
 .vim/.netrwhist
 .vim/backup
