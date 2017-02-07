@@ -29,7 +29,7 @@ set -x TERM   screen-256color
 
 # fixme git alias auto-completion is hosed
 
-set -x PATH $PATH $HOME/.local/bin $HOME/scripts
+set -x PATH $HOME/.local/bin $HOME/scripts $HOME/.cargo/bin $PATH
 
 # host-specific
 if test (hostname) = "detune";
