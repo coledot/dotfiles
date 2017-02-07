@@ -53,6 +53,7 @@ if test -e (which task);
   function pers; clear; task proj:pers $argv; end
 end
 
+function keyagent; ssh-agent -s; and ssh-add -t 0; end
 function keyon; ssh-add -t 0; end
 function keyoff; ssh-add -D; end
 function keyls; ssh-add -l; end
