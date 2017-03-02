@@ -28,13 +28,6 @@ esac
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 
-# needed to use Vim as a man pager
-# FIXME breaks `git diff`
-#export PAGER="/bin/sh -c \"unset PAGER;col -b -x | \
-#    vim -R -c 'set ft=man nomod nolist' -c 'map q :q<CR>' \
-#    -c 'map <SPACE> <C-D>' -c 'map b <C-U>' \
-#    -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
-
 # grab env vars from ssh agent
 if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
     . $HOME/.ssh-agent
@@ -48,19 +41,24 @@ if [ -f /etc/bash_completion ]; then
 fi
 # add'l completion provided by brew
 if [[ ! -z /usr/local/bin/brew ]]; then
-    if [[ -f $(brew --prefix)/etc/bash_completion ]]; then
-        . $(brew --prefix)/etc/bash_completion
+    BREW_PREFIX=`brew --prefix`
+    if [[ -f $BREW_PREFIX/etc/bash_completion ]]; then
+        . $BREW_PREFIX/etc/bash_completion
     fi
 fi
 # more fun stuff re: completion
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    # FIXME bg color is hosed after using vim
-    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
+    GITINFO=' \[\033[00;37m\]$(__git_ps1)'
 else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    GITINFO=''
 fi
+CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
+USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
+RESETCOLOR='\[\033[00m\]'
+export PS1="${CURRENTDIR}${GITINFO}\n${USERATHOST} \$ ${RESETCOLOR}"
+
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     __git_complete gco _git_checkout
     __git_complete gdf _git_diff
@@ -100,35 +98,9 @@ function start_ssh_agent {
   fi
 }
 
-#function make_ssh_aliases {
-#  while read line; do
-#      echo "$line" | egrep '^[ \t]*$|^[ \t]*#' >/dev/null
-#      if [[ $? -ne 0 ]]; then
-#          host=$line
-#          #alias $host="screen -X title $host && ssh $host.inigral.com"
-#          alias $host="ssh $host.inigral.com"
-#      fi
-#  done < ~/.inigral_ssh_aliases
-#}
-
-
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
-    ## login to inigral machine & open local tunnel for testing using cole_inigral's passenger instance
-    #alias cdtssh="sudo ssh -i ~/.ssh/id_rsa \
-    #              -Y cole@cole_inigral"
-    #alias cdttun="sudo ssh -i ~/.ssh/id_rsa \
-    #              -L localhost:443:localhost:443 \
-    #              -L localhost:5555:localhost:5555 \
-    #              -Y cole@cole_inigral"
-    #alias telecdttun="sudo ssh -i ~/.ssh/id_rsa \
-    #              -L localhost:443:localhost:443 \
-    #              -L localhost:5555:localhost:5555 \
-    #              -Y -p 5055 cole@localhost"
-    #alias teleclientcdt="tele -client -in=localhost:5055 -out=cole_inigral:5055"
-    #alias telesshdelay="sudo ssh -i ~/.ssh/id_rsa -Y -p 5056 cole@localhost"
-    #alias teleclientdelay="tele -client -in=localhost:5056 -out=delay:5055"
 
     GOROOT=/usr/local/go
     GOPATH=$HOME/.go:$HOME/.go
@@ -137,19 +109,7 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     LIBRARY_PATH=/usr/local/lib
 
     PGDATA=/usr/local/var/postgres
-
-    #make_ssh_aliases
-
-    # FIXME
-    #SSHAGENT=/usr/bin/ssh-agent
-    #SSHAGENTARGS="-s"
-    #if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
-    #    eval `$SSHAGENT $SSHAGENTARGS`
-    #    trap "kill $SSH_AGENT_PID" 0
-    #fi
 fi
-
-# to make a ramdisk: diskutil erasevolume HFS+ 'ramdisk' `hdiutil attach -nomount ram://8388608`
 
 # vim: et ts=4 sw=4
 
