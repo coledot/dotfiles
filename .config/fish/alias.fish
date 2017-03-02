@@ -1,7 +1,5 @@
 function vimalias; vim ~/.config/fish/alias.fish; end
 
-#function cdtssh; ssh -Y cole_inigral; end
-
 function ll; ls -l; end
 function la; ls -la; end
 function ltr; ls -ltr; end
@@ -32,20 +30,20 @@ function gbs; git bisect $argv; end
 function gbr; git branch $argv; end
 
 function gash; git stash $argv; end
-function gcmm; git commit; end
-function gcod; git checkout -- .; end
+#function gcmm; git commit; end
+#function gcod; git checkout -- .; end
 function gshv; git shove; end
 function gpan; git panic; end
 
 function gadcm; git add .; and git commit -m $argv; end
 
-function rlsc; rails c $argv; end
-
-function pspec; rake parallel:spec; cat log/parallel_summary.log; end
-function fpspec; rake parallel:setup; pspec; end
-
-function psgsrt; passenger start; end
-function psgstp; passenger stop; end
+#function rlsc; rails c $argv; end
+#function pspec; rake parallel:spec; cat log/parallel_summary.log; end
+#function fpspec; rake parallel:setup; pspec; end
+#function psgsrt; passenger start; end
+#function psgstp; passenger stop; end
+#function vgr; vagrant $argv; end
+#function punch; ttrack $argv; end
 
 if test -e (which task);
   function sup; clear; task next; end
@@ -53,10 +51,8 @@ if test -e (which task);
   function pers; clear; task proj:pers $argv; end
 end
 
+function keyagent; ssh-agent -s; and ssh-add -t 0; end
 function keyon; ssh-add -t 0; end
 function keyoff; ssh-add -D; end
 function keyls; ssh-add -l; end
-
-function vgr; vagrant $argv; end
-function punch; ttrack $argv; end
 
