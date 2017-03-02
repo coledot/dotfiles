@@ -45,11 +45,13 @@ if [[ -f /usr/local/bin/brew ]]; then
     if [[ -f $BREW_PREFIX/etc/bash_completion ]]; then
         . $BREW_PREFIX/etc/bash_completion
     fi
+else
+    BREW_PREFIX=''
 fi
 # more fun stuff re: completion
-if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+if [ -e $BREW_PREFIX/etc/bash_completion.d/git-prompt ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
-    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    source $BREW_PREFIX/etc/bash_completion.d/git-prompt
     GITINFO=' \[\033[00;37m\]$(__git_ps1)'
 else
     GITINFO=''
