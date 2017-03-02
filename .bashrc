@@ -51,11 +51,15 @@ fi
 if [ -e /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
     source /usr/local/etc/bash_completion.d/git-prompt.sh
-    # FIXME bg color is hosed after using vim
-    export PS1='\[\033[01;34m\]\w\[\033[01;37m\] \[\033[00;37m\]$(__git_ps1)\n\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \$ \[\033[00m\]'
+    GITINFO=' \[\033[00;37m\]$(__git_ps1)'
 else
-    export PS1='\[\033[01;32;40m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h \[\033[00;37m\]\n\[\033[01;34m\]\w\n\$ \[\033[00m\]'
+    GITINFO=''
 fi
+CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
+USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
+RESETCOLOR='\[\033[00m\]'
+export PS1="${CURRENTDIR}${GITINFO}\n${USERATHOST} \$ ${RESETCOLOR}"
+
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     __git_complete gco _git_checkout
     __git_complete gdf _git_diff
