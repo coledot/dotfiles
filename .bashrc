@@ -36,8 +36,8 @@ fi
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
 fi
 # add'l completion provided by brew
 if [[ -f /usr/local/bin/brew ]]; then
@@ -49,9 +49,9 @@ else
     BREW_PREFIX=''
 fi
 # more fun stuff re: completion
-if [ -e $BREW_PREFIX/etc/bash_completion.d/git-prompt ]; then
+if [ -e /usr/share/git/completion/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
-    source $BREW_PREFIX/etc/bash_completion.d/git-prompt
+    source /usr/share/git/completion/git-prompt.sh
     GITINFO=' \[\033[00;37m\]$(__git_ps1)'
 else
     GITINFO=''
