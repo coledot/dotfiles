@@ -7,10 +7,6 @@ if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:"${PATH}"
 fi
 
-if [ -d $HOME/torch ] ; then
-    . $HOME/torch/install/bin/torch-activate
-fi
-
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export HOMEBREW_NO_ANALYTICS=1
 
