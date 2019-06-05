@@ -56,6 +56,7 @@ if [ -e /usr/share/git/completion/git-prompt.sh ]; then
 else
     GITINFO=''
 fi
+
 CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
 USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
 RESETCOLOR='\[\033[00m\]'
@@ -100,6 +101,10 @@ function start_ssh_agent {
   fi
 }
 
+for rvm_dir in /home/cole/.gem/ruby/*; do
+    PATH=${PATH}:${rvm_dir}/bin
+done
+
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
     alias git='/usr/local/bin/git'
@@ -113,7 +118,10 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     PGDATA=/usr/local/var/postgres
 fi
 
-# vim: et ts=4 sw=4
-
 PERL_MB_OPT="--install_base \"/Users/cole/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/cole/perl5"; export PERL_MM_OPT;
+
+# autostart tmux, but only if in Xorg and if shell is interactive
+[[ $DISPLAY ]] && [[ $- == *i* ]] && [[ -z "$TMUX" ]] && exec tmux
+
+# vim: et ts=4 sw=4
