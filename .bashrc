@@ -104,6 +104,7 @@ function start_ssh_agent {
 for rvm_dir in /home/cole/.gem/ruby/*; do
     PATH=${PATH}:${rvm_dir}/bin
 done
+export rvm_ignore_gemrc_issues=1
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
