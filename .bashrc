@@ -9,21 +9,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-    ;;
-*)
-    ;;
-esac
+[ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
 
 export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
@@ -33,21 +19,6 @@ if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
     . $HOME/.ssh-agent
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-fi
-# add'l completion provided by brew
-if [[ -f /usr/local/bin/brew ]]; then
-    BREW_PREFIX=`brew --prefix`
-    if [[ -f $BREW_PREFIX/etc/bash_completion ]]; then
-        . $BREW_PREFIX/etc/bash_completion
-    fi
-else
-    BREW_PREFIX=''
-fi
 # more fun stuff re: completion
 if [ -e /usr/share/git/completion/git-prompt.sh ]; then
     export GIT_PS1_SHOWDIRTYSTATE=true
@@ -77,7 +48,7 @@ if [ -f $HOME/.commacd.bash ]; then
 fi
 
 # If not running interactively, don't do anything
-tty -s; if [[ $? -eq 0 ]]; then
+if [[ $- != *i* ]]; then
   # disable xon/off (annoying)
   stty stop undef
   stty start undef
@@ -101,13 +72,20 @@ function start_ssh_agent {
   fi
 }
 
-for rvm_dir in /home/cole/.gem/ruby/*; do
-    PATH=${PATH}:${rvm_dir}/bin
-done
 export rvm_ignore_gemrc_issues=1
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
+    # add'l completion provided by brew
+    if [[ -f /usr/local/bin/brew ]]; then
+        BREW_PREFIX=`brew --prefix`
+        if [[ -f $BREW_PREFIX/etc/bash_completion ]]; then
+            . $BREW_PREFIX/etc/bash_completion
+        fi
+    else
+        BREW_PREFIX=''
+    fi
+
     alias git='/usr/local/bin/git'
 
     GOROOT=/usr/local/go
@@ -117,10 +95,10 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     LIBRARY_PATH=/usr/local/lib
 
     PGDATA=/usr/local/var/postgres
-fi
 
-PERL_MB_OPT="--install_base \"/Users/cole/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/cole/perl5"; export PERL_MM_OPT;
+    PERL_MB_OPT="--install_base \"/Users/cole/perl5\""; export PERL_MB_OPT;
+    PERL_MM_OPT="INSTALL_BASE=/Users/cole/perl5"; export PERL_MM_OPT;
+fi
 
 # autostart tmux, but only if in Xorg and if shell is interactive
 [[ $DISPLAY ]] && [[ $- == *i* ]] && [[ -z "$TMUX" ]] && exec tmux
