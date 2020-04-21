@@ -27,26 +27,7 @@ if [[ -d $HOME/scripts ]]; then
 fi
 export rvm_ignore_gemrc_issues=1
 
-
-# more fun stuff re: completion
-GITINFO=''
-if [ -e /usr/share/git/completion/git-prompt.sh ]; then
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    source /usr/share/git/completion/git-prompt.sh
-    GITINFO=' \[\033[00;37m\]$(__git_ps1)'
-fi
-
-CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
-USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
-RESETCOLOR='\[\033[00m\]'
-export PS1="${CURRENTDIR}${GITINFO}\n${USERATHOST} \$ ${RESETCOLOR}"
-unset CURRENTDIR
-unset USERATHOST
-unset RESETCOLOR
-unset GITINFO
-
 shopt -s histappend
-shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
@@ -56,22 +37,10 @@ if [ ! -z "$SSH_CLIENT" ]; then
     source_if_exists $HOME/.ssh-agent
 fi
 
-source_if_exists $HOME/.bash_aliases
-source_if_exists $HOME/.commacd.bash
-
-if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-    __git_complete gco _git_checkout
-    __git_complete gdf _git_diff
-    __git_complete gll _git_pull
-    __git_complete gsh _git_push
-fi
-
 if [[ $- == *i* ]]; then
-  # disable xon/off (annoying)
-  stty stop undef
-  stty start undef
-  stty -ixon
-  stty -ixoff
+    source_if_exists $HOME/.bash_aliases
+    source_if_exists $HOME/.bash_interactive
+    source_if_exists $HOME/.commacd.bash
 fi
 
 # host-specific shenanigans. try to keep this to a minimum
@@ -99,8 +68,5 @@ if [[ "$HOSTNAME" == "detune" ]]; then
     PERL_MB_OPT="--install_base \"/Users/cole/perl5\""; export PERL_MB_OPT;
     PERL_MM_OPT="INSTALL_BASE=/Users/cole/perl5"; export PERL_MM_OPT;
 fi
-
-# autostart tmux, but only if in Xorg and if shell is interactive
-[[ $DISPLAY ]] && [[ $- == *i* ]] && [[ -z "$TMUX" ]] && exec tmux
 
 # vim: et ts=4 sw=4
