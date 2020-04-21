@@ -1,64 +1,10 @@
 #! /bin/bash
 
-export HISTCONTROL=ignoreboth
-export HISTSIZE=5000
-shopt -s histappend
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
-
-export EDITOR=/usr/bin/vim
-export TERM=xterm-256color
-
-# grab env vars from ssh agent
-if [ ! -z "$SSH_CLIENT" ] && [ -f $HOME/.ssh-agent ]; then
-    . $HOME/.ssh-agent
-fi
-
-# more fun stuff re: completion
-if [ -e /usr/share/git/completion/git-prompt.sh ]; then
-    export GIT_PS1_SHOWDIRTYSTATE=true
-    source /usr/share/git/completion/git-prompt.sh
-    GITINFO=' \[\033[00;37m\]$(__git_ps1)'
-else
-    GITINFO=''
-fi
-
-CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
-USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
-RESETCOLOR='\[\033[00m\]'
-export PS1="${CURRENTDIR}${GITINFO}\n${USERATHOST} \$ ${RESETCOLOR}"
-
-if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-    __git_complete gco _git_checkout
-    __git_complete gdf _git_diff
-    __git_complete gll _git_pull
-    __git_complete gsh _git_push
-fi
-
-if [ -f $HOME/.bash_aliases ]; then
-    . $HOME/.bash_aliases
-fi
-if [ -f $HOME/.commacd.bash ]; then
-    . $HOME/.commacd.bash
-fi
-
-# If not running interactively, don't do anything
-if [[ $- != *i* ]]; then
-  # disable xon/off (annoying)
-  stty stop undef
-  stty start undef
-  stty -ixon
-  stty -ixoff
-fi
-
-if [[ -d $HOME/scripts ]]; then
-    export PATH=${PATH}:$HOME/scripts
-fi
+function source_if_exists {
+    if [ -f $1 ]; then
+        . $1
+    fi
+}
 
 function start_ssh_agent {
   SSHAGENT=/usr/bin/ssh-agent
@@ -72,7 +18,61 @@ function start_ssh_agent {
   fi
 }
 
+export HISTCONTROL=ignoreboth
+export HISTSIZE=5000
+export EDITOR=/usr/bin/vim
+export TERM=xterm-256color
+if [[ -d $HOME/scripts ]]; then
+    export PATH=${PATH}:$HOME/scripts
+fi
 export rvm_ignore_gemrc_issues=1
+
+
+# more fun stuff re: completion
+GITINFO=''
+if [ -e /usr/share/git/completion/git-prompt.sh ]; then
+    export GIT_PS1_SHOWDIRTYSTATE=true
+    source /usr/share/git/completion/git-prompt.sh
+    GITINFO=' \[\033[00;37m\]$(__git_ps1)'
+fi
+
+CURRENTDIR='\[\033[01;34m\]\w\[\033[01;37m\]'
+USERATHOST='\[\033[01;32m\]\u\[\033[0;37m\]@\[\033[01;37m\]\h\[\033[00;37m\]'
+RESETCOLOR='\[\033[00m\]'
+export PS1="${CURRENTDIR}${GITINFO}\n${USERATHOST} \$ ${RESETCOLOR}"
+unset CURRENTDIR
+unset USERATHOST
+unset RESETCOLOR
+unset GITINFO
+
+shopt -s histappend
+shopt -s checkwinsize
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
+
+# grab env vars from ssh agent
+if [ ! -z "$SSH_CLIENT" ]; then
+    source_if_exists $HOME/.ssh-agent
+fi
+
+source_if_exists $HOME/.bash_aliases
+source_if_exists $HOME/.commacd.bash
+
+if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+    __git_complete gco _git_checkout
+    __git_complete gdf _git_diff
+    __git_complete gll _git_pull
+    __git_complete gsh _git_push
+fi
+
+if [[ $- == *i* ]]; then
+  # disable xon/off (annoying)
+  stty stop undef
+  stty start undef
+  stty -ixon
+  stty -ixoff
+fi
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
