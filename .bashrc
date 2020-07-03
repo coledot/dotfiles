@@ -12,6 +12,12 @@ function start_ssh_agent {
   fi
 }
 
+function cd_with_fzf() {
+    cd $HOME && cd $(find -type d | fzf --preview="tree -L 1 {}" --bind="space:toggle-preview" --preview-window=:hidden)
+}
+
+bind -x '"\C-f":"cd_with_fzf"'
+
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
 export EDITOR=/usr/bin/vim
