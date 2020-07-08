@@ -140,6 +140,9 @@ if has("win32")
     set fileencodings=ucs-bom,utf-8,latin1
   endif
 elseif has("unix")
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+
   set nocompatible
 
   set backupdir=~/.vim/backup

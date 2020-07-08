@@ -1,8 +1,9 @@
-set show-all-if-ambiguous on
+set bell-style off
 set completion-ignore-case on
 set completion-prefix-display-length 2
-set bell-style off
+set enable-bracketed-paste on
 set mark-symlinked-directories on
+set show-all-if-ambiguous on
 
 Control-j: menu-complete
 #Control-k: menu-complete-backward

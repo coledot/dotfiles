@@ -29,9 +29,11 @@ set -x TERM   screen-256color
 
 # fixme git alias auto-completion is hosed
 
+set -x PATH $HOME/.local/bin $HOME/scripts $HOME/.cargo/bin $PATH
+
 # host-specific
 if test (hostname) = "detune";
-  set -x PATH              /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin $HOME/.local/bin
+  set -x PATH              /usr/local/bin /usr/local/sbin $PATH $GOROOT/bin $HOME/.rvm/bin
   set -x PKG_CONFIG_PATH   /usr/local/lib/pkgconfig
   set -x LIBRARY_PATH      /usr/local/lib
   set -x PGDATA            /usr/local/var/postgres

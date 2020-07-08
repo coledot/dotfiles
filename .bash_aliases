@@ -43,3 +43,9 @@ alias keyoff="ssh-add -D"
 alias keyls="ssh-add -l"
 
 alias vgr="vagrant"
+
+alias glances="glances -1"
+
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
+alias ls="ls --color=auto"
