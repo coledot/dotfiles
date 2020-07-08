@@ -1,10 +1,10 @@
-directory: ~/Music/SynchedMusic
+directory: ~/m
 library: ~/.beets_data/music_library.blb
 
 import:
     copy: no
 
-plugins: convert
+plugins: convert duplicates
 
 convert:
     command: ffmpeg -i $source -y -vn -aq 0 $dest
