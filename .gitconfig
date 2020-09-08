@@ -45,12 +45,10 @@
     panic = !bash ~/scripts/prompt git PANIC && git reset -- . && git checkout -- .
 
 [diff]
-    tool = vim-wrapper-script
+    tool = vimdiff
     algorithm = patience
-
-[difftool "vim-wrapper-script"]
-    cmd = ~/scripts/git_vimdiff_wrapper.sh $LOCAL $REMOTE
 
 [difftool]
     prompt = false
 
+# vim: et ts=4 sw=4
