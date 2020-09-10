@@ -4,8 +4,10 @@ if [ -d $HOME/.local/bin ] ; then
     PATH=$HOME/.local/bin:"${PATH}"
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export EDITOR=/usr/bin/vim
+export PATH="$HOME/.cargo/bin:$HOME/.rvm/bin:$PATH"
 export HOMEBREW_NO_ANALYTICS=1
 
-export PATH="$HOME/.cargo/bin:$PATH"
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
 

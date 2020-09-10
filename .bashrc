@@ -20,7 +20,6 @@ bind -x '"\C-f":"cd_with_fzf"'
 
 export HISTCONTROL=ignoreboth
 export HISTSIZE=5000
-export EDITOR=/usr/bin/vim
 export TERM=xterm-256color
 
 # more fun stuff re: completion
@@ -48,9 +47,6 @@ stty stop undef
 stty start undef
 stty -ixon
 stty -ixoff
-
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe.sh ] && eval "$(lesspipe.sh)"
 
 if [ -e /usr/local/etc/bash_completion.d/git-completion.bash ]; then
     __git_complete gco _git_checkout
