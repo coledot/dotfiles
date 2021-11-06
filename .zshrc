@@ -1,3 +1,7 @@
+# autostart tmux, but only if in Xorg and if shell is interactive
+# (must be near beginning of file)
+[[ $- = *i* ]] && [[ $DISPLAY ]] && [[ -z "$TMUX" ]] && tmux
+
 source ~/.profile
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -76,7 +80,6 @@ plugins=(
     ssh-agent
     systemd
     tmux
-    vi-mode
     zsh-autosuggestions
     zsh-completions
 )
@@ -93,13 +96,16 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ackv='ack -v '
+alias acvac='ack -v "\back\b"'
+alias psxck='ps axuww | acvac | ack '
+alias bounceswap='sudo swapoff -a && sudo swapon -a'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# autostart tmux, but only if in Xorg and if shell is interactive
-# FIXME doesn't work
-#[[ $- = *i* ]] && [[ $DISPLAY ]] && [[ -z "$TMUX" ]] && tmux
-
 # must be near or at end of file
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
