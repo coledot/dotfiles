@@ -4,5 +4,6 @@ elseif has("unix")
     set guifont=Monospace\ Regular\ 12
 endif
 
-colorscheme zenburn
+set background=dark
+colorscheme solarized
 

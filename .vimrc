@@ -4,6 +4,7 @@ set backup
 set cindent
 set noequalalways
 set expandtab
+set hidden
 set incsearch
 set modeline
 set number
@@ -47,8 +48,7 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-" FIXME conflicts w/ closetag.vim
-"noremap <C-_> <C-w>_
+noremap <C-_> <C-w>_
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -58,12 +58,14 @@ let $PAGER=''
 
 let mapleader=" "
 
-let g:miniBufExplSplitBelow = 1 " MiniBufExplorer on bottom
-let g:miniBufExplMaxSize = 3 " no. lines to use
-"let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
-let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
+"let g:miniBufExplSplitBelow = 1 " MiniBufExplorer on bottom
+"let g:miniBufExplMaxSize = 3 " no. lines to use
+""let g:miniBufExplMapWindowNavVim = 1 " Ctrl + [hjkl] to navigate
+"let g:miniBufExplMapCTabSwitchBufs = 1 " Ctrl {, + Shift} + Tab to navigate
 
 let g:ctrlp_custom_ignore = '\v[\/]tmp$'
+
+let g:accordion_mode="h"
 
 noremap <silent><Leader>/ :nohls<CR>
 noremap <silent><Leader>o :split<CR>:CtrlP .<CR>
@@ -72,6 +74,8 @@ noremap <silent><Leader>f :NERDTreeFind<CR>
 " NOTE trailing whitespace intended
 noremap <Leader>a :Ack 
 noremap <Leader>t :Tabularize 
+nnoremap <C-'> :bnext<CR>
+nnoremap <C-;> :bprev<CR>
 
 filetype off
 call pathogen#infect()
@@ -96,6 +100,8 @@ au BufRead,BufNewFile *.py              set et ts=4 sw=4 fdm=indent foldlevel=99
 au BufRead,BufNewFile *.rb,*.erb,*.rake set et ts=2 sw=2
 au BufRead,BufNewFile *.rb,*.erb,*.rake match ExtraWhitespace /\s\+$\|\t/
 au BufRead,BufNewFile *.js,*.js.coffee  set et ts=2 sw=2
+au BufRead,BufNewFile *.ts              set et ts=2 sw=2
+au BufRead,BufNewFile *.html            set et ts=2 sw=2
 au BufRead,BufNewFile *.md              set filetype=markdown
 " puppet
 au BufRead,BufNewFile *.pp              set et ts=2 sw=2
@@ -112,7 +118,8 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
 
 if !has("gui_running")
-  colorscheme zenburn
+  set background=dark
+  colorscheme solarized
 endif
 
 if has("win32")
