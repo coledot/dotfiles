@@ -64,7 +64,7 @@ source_if_exists $HOME/.bash_aliases
 source_if_exists $HOME/.commacd.bash
 
 # autostart tmux, but only if in Xorg and if shell is interactive
-[[ $DISPLAY ]] && [[ -z "$TMUX" ]] && exec tmux
+#[[ $DISPLAY ]] && [[ -z "$TMUX" ]] && exec tmux
 
 # host-specific shenanigans. try to keep this to a minimum
 if [[ "$HOSTNAME" == "detune" ]]; then
@@ -82,3 +82,6 @@ if [[ "$HOSTNAME" == "detune" ]]; then
 fi
 
 # vim: et ts=4 sw=4
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
