@@ -77,9 +77,10 @@ plugins=(
     colored-man-pages 
     extract
     git
-    ssh-agent
+    #ssh-agent
     systemd
     tmux
+    z
     zsh-autosuggestions
     zsh-completions
 )
@@ -96,10 +97,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ackv='ack -v '
-alias acvac='ack -v "\back\b"'
-alias psxck='ps axuww | acvac | ack '
-alias bounceswap='sudo swapoff -a && sudo swapon -a'
+source ~/.zsh_aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
