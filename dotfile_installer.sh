@@ -10,8 +10,9 @@ if [[ ! -d $dotfile_bkp_dir ]]; then
 fi
 
 for true_dotfile in $filelist; do
-	if [[ `basename $true_dotfile` == `basename $0` ]]; then
-		# don't symlink yourself
+	if [[ `basename $true_dotfile` == `basename $0` ||
+        `basename $true_dotfile` == 'README.md' ]]; then
+		# don't symlink these
 		continue
 	fi
 
@@ -22,6 +23,7 @@ for true_dotfile in $filelist; do
 			mv $old_dotfile $dotfile_bkp_dir
 		fi
 
+		echo "making link: $symlink_dotfile -> $true_dotfile"
 		ln -sf $true_dotfile $symlink_dotfile
 		if [[ $? -ne 0 ]]; then
 			echo "failed to symlink $symlink_dotfile to $true_dotfile"
