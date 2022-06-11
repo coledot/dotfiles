@@ -117,10 +117,10 @@ let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-if !has("gui_running")
-  set background=dark
-  colorscheme solarized
-endif
+"if !has("gui_running")
+"  set background=dark
+"  colorscheme solarized
+"endif
 
 if has("win32")
   source $VIMRUNTIME/vimrc_example.vim
@@ -157,4 +157,3 @@ elseif has("unix")
 endif
 
 " vim: et ts=2 sw=2
-
