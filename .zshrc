@@ -97,24 +97,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ackv='ack -v '
-alias acvac='ack -v "\back\b"'
-alias bounceswap='sudo swapoff -a && sudo swapon -a'
-alias cat='bat'
-alias df='duf'
-alias find='fd'
-alias grep='rg'
-alias l='exa'
-alias ls='exa'
-alias ll='exa -l'
-alias la='exa -la'
-alias lsa='exa -laa'
-alias nth='choose'
-alias open='xdg-open'
-alias ps='procs'
-alias psxck='\ps axuww | acvac | ack '
-alias vim='nvim'
-alias gvim='nvim-qt'
+source $HOME/.zsh_aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
